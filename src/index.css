@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -8,28 +12,111 @@
 
 html {
   scroll-behavior: smooth;
+  min-width: 320px;
+  background: #050a12;
 }
 
 body {
   min-width: 320px;
   min-height: 100vh;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #f6f8fb;
-  color: #172033;
+  width: 100%;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #050a12;
+  color: #ffffff;
+
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
 }
+
+/* =========================================
+   REACT ROOT
+========================================= */
+
+#root {
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  display: block;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
 
 button {
   font: inherit;
+  border: 0;
 }
 
 button:focus-visible {
-  outline: 2px solid #334155;
+  outline: 2px solid #60a5fa;
   outline-offset: 3px;
 }
 
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================
+   TEXT SELECTION
+========================================= */
+
 ::selection {
-  background: #dce7ff;
-  color: #172033;
+  background: rgba(96, 165, 250, 0.25);
+  color: #ffffff;
+}
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050a12;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  #root {
+    width: 100%;
+  }
 }
