@@ -100,387 +100,452 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#050a12] text-white">
+    <div className="min-h-screen w-full max-w-full min-w-0 overflow-x-clip bg-[#050a12] text-white">
+      {/* HEADER */}
       <Header balance={balance} />
 
-      {/* Ambient background */}
-      <div className="pointer-events-none fixed inset-0 -z-0">
-        <div className="absolute left-[15%] top-20 h-72 w-72 rounded-full bg-blue-500/[0.06] blur-[100px]" />
+      {/* AMBIENT BACKGROUND */}
+      <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
+        <div className="absolute left-[8%] top-24 h-72 w-72 rounded-full bg-blue-500/[0.055] blur-[110px]" />
 
-        <div className="absolute right-[10%] top-[40%] h-80 w-80 rounded-full bg-purple-500/[0.05] blur-[120px]" />
+        <div className="absolute right-[8%] top-[38%] h-80 w-80 rounded-full bg-purple-500/[0.045] blur-[120px]" />
 
-        <div className="absolute bottom-0 left-[40%] h-72 w-72 rounded-full bg-amber-400/[0.035] blur-[100px]" />
+        <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-400/[0.025] blur-[110px]" />
       </div>
 
-      {/* CAPTCHA DASHBOARD */}
+      {/* =========================================================
+          CAPTCHA SCREEN
+      ========================================================== */}
       {screen === "captcha" && (
-  <main className="relative z-10">
+        <main className="relative z-10 w-full">
 
-    <div className="mx-auto w-full min-w-0 max-w-7xl px-3 py-6 sm:px-8 sm:py-12">
-      {/* Brand heading */}
-      <div className="mb-8 text-center">
+          <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
 
-        <div className="mb-3 flex items-center justify-center gap-2">
+            {/* BRAND */}
+            <section className="mx-auto w-full max-w-4xl text-center">
 
-          <Gem
-            size={22}
-            className="text-amber-300"
-          />
-
-          <span className="text-sm font-bold tracking-[0.22em] text-white">
-            VELOOP REWARDS
-          </span>
-
-        </div>
-
-        <h2 className="text-[27px] font-black uppercase leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl">
-          CAPTCHA{" "}
-
-          <span className="bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">
-            EARN FLOW
-          </span>
-
-        </h2>
-
-        <p className="mx-auto mt-2 max-w-[300px] text-[10px] font-medium leading-4 text-slate-500 sm:max-w-none sm:text-sm">
-          Secure Verification
-          <span className="mx-2 text-slate-700">•</span>
-          Earn Rewards
-          <span className="mx-2 text-slate-700">•</span>
-          Build Trust
-        </p>
-
-      </div>
-
-      {/* Progress */}
-      <FlowSteps currentStep={selectedOption ? 2 : 1} />
-
-      {/* Main phone */}
-      <PhoneShell>
-
-        {/* Mobile header */}
-        <div className="flex min-w-0 items-center justify-between gap-2 px-3 pt-6 sm:px-4 sm:pt-7">
-          <button
-            type="button"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-400"
-          >
-            ←
-          </button>
-
-          <div className="min-w-0 flex-1 text-center">
-
-            <p className="text-sm font-bold tracking-[0.16em] text-white">
-              VELOOP
-            </p>
-
-            <p className="text-[7px] font-bold uppercase tracking-[0.22em] text-slate-500">
-              Rewards
-            </p>
-
-          </div>
-
-          <div className="flex shrink-0 items-center gap-1 rounded-full border border-amber-300/15 bg-amber-300/[0.05] px-2 py-1.5 sm:gap-1.5 sm:px-2.5">
-            <Gem
-              size={12}
-              className="text-amber-300"
-            />
-
-            <span className="text-[10px] font-bold text-amber-200">
-              {Number.isInteger(balance)
-                ? balance
-                : balance.toFixed(1)}
-            </span>
-
-          </div>
-
-        </div>
-
-        {/* Content */}
-        <div className="px-3 pb-4 pt-7 sm:px-4 sm:pb-5 sm:pt-9">
-
-          {/* Heading */}
-          <div className="text-center">
-
-            <h3 className="text-2xl font-extrabold text-white">
-
-              Earn{" "}
-
-              <span className="text-amber-300">
-                Gems
-              </span>
-
-            </h3>
-
-            <p className="mx-auto mt-2 max-w-[270px] text-xs leading-5 text-slate-500">
-              Complete a quick security check
-              to earn rewards.
-            </p>
-
-          </div>
-
-          {/* CAPTCHA */}
-          <div className="mt-5 sm:mt-7">
-
-            <CaptchaChallenge
-              captcha={challenge.captcha}
-            />
-
-          </div>
-
-          {/* Instruction */}
-          <div className="mt-5 text-center">
-
-            <p className="text-xs font-semibold text-slate-300">
-              Select the matching code
-            </p>
-
-          </div>
-
-          {/* Options */}
-          <div className="mt-3 grid min-w-0 grid-cols-2 gap-2 sm:mt-4 sm:gap-2.5">
-            {challenge.options.map((option) => (
-              <CaptchaOption
-                key={option}
-                option={option}
-                selected={selectedOption === option}
-                disabled={Boolean(selectedOption)}
-                onClick={handleOptionClick}
-              />
-            ))}
-
-          </div>
-
-          {/* Security */}
-          <div className="mt-4 rounded-xl border border-white/[0.07] bg-white/[0.025] p-3">
-
-            <div className="flex items-center gap-2">
-
-              <ShieldCheck
-                size={15}
-                className="text-slate-400"
-              />
-
-              <p className="text-[10px] leading-4 text-slate-500">
-                This helps protect your account
-                from automated access.
-              </p>
-
-            </div>
-
-          </div>
-
-          {/* Reward */}
-          <div className="mt-4 rounded-xl border border-amber-300/20 bg-amber-300/[0.035] p-3">
-
-            <div className="flex items-center gap-3">
-
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-300/[0.08]">
+              <div className="mb-2 flex items-center justify-center gap-2 sm:mb-3">
 
                 <Gem
-                  size={19}
-                  className="text-amber-300"
+                  size={18}
+                  strokeWidth={2}
+                  className="shrink-0 text-amber-300 sm:h-5 sm:w-5"
                 />
 
-              </div>
-
-              <div>
-
-                <p className="text-[10px] font-medium text-slate-400">
-                  Complete verification to earn
-                </p>
-
-                <p className="text-sm font-extrabold text-amber-300">
-                  +1 Gem
-                </p>
+                <span className="text-[11px] font-bold tracking-[0.18em] text-white sm:text-sm sm:tracking-[0.22em]">
+                  VELOOP REWARDS
+                </span>
 
               </div>
 
-            </div>
+              <h1 className="mx-auto max-w-full text-[clamp(27px,7vw,56px)] font-black uppercase leading-[0.98] tracking-[-0.045em] text-white">
 
-          </div>
+                CAPTCHA{" "}
 
-        </div>
+                <span className="bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">
+                  EARN FLOW
+                </span>
 
-      </PhoneShell>
+              </h1>
 
-      {/* Bottom feature strip */}
-      <div className="mx-auto mt-8 hidden max-w-5xl grid-cols-5 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#09111d] md:grid">
+              <p className="mx-auto mt-2 max-w-[310px] text-[10px] font-medium leading-4 text-slate-500 sm:max-w-none sm:text-sm sm:leading-5">
 
-        {[
-          ["🛡", "SECURE", "Advanced protection"],
-          ["🎁", "REWARDING", "Earn Gems"],
-          ["⚡", "FAST", "Quick verification"],
-          ["▣", "MOBILE FIRST", "Optimized experience"],
-          ["🔒", "TRUSTED", "Security first"],
-        ].map(([icon, title, description]) => (
-          <div
-            key={title}
-            className="border-r border-white/[0.06] p-4 text-center last:border-r-0"
-          >
+                Secure Verification
 
-            <div className="text-lg">
-              {icon}
-            </div>
+                <span className="mx-1.5 text-slate-700 sm:mx-2">
+                  •
+                </span>
 
-            <p className="mt-2 text-[9px] font-bold tracking-[0.12em] text-slate-300">
-              {title}
-            </p>
+                Earn Rewards
 
-            <p className="mt-1 text-[8px] text-slate-600">
-              {description}
-            </p>
+                <span className="mx-1.5 text-slate-700 sm:mx-2">
+                  •
+                </span>
 
-          </div>
-        ))}
+                Build Trust
 
-      </div>
-
-    </div>
-
-  </main>
-)}
-
-      {/* VERIFYING */}
-      {screen === "verifying" && (
-  <main className="relative z-10">
-
-    <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12">
-
-      <div className="mb-8 text-center">
-
-        <div className="mb-3 flex items-center justify-center gap-2">
-          <Gem
-            size={22}
-            className="text-amber-300"
-          />
-
-          <span className="text-sm font-bold tracking-[0.22em] text-white">
-            VELOOP REWARDS
-          </span>
-        </div>
-
-        <h2 className="text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">
-          CAPTCHA{" "}
-          <span className="text-purple-300">
-            EARN FLOW
-          </span>
-        </h2>
-
-        <p className="mt-2 text-xs text-slate-500">
-          Secure Verification
-          <span className="mx-2">•</span>
-          Earn Rewards
-          <span className="mx-2">•</span>
-          Build Trust
-        </p>
-
-      </div>
-
-      <FlowSteps currentStep={3} />
-
-      <PhoneShell>
-
-        <div className="flex h-full min-h-[690px] flex-col items-center justify-center px-7 text-center">
-
-          <div className="relative flex h-36 w-36 items-center justify-center">
-
-            <div className="absolute inset-0 animate-pulse rounded-full border border-purple-400/20" />
-
-            <div className="absolute inset-4 rounded-full border border-purple-400/20" />
-
-            <div className="absolute inset-8 rounded-full border border-purple-400/20" />
-
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-purple-300/20 bg-purple-400/[0.08]">
-
-              <LockKeyhole
-                size={30}
-                className="text-purple-300"
-              />
-
-            </div>
-
-          </div>
-
-          <h3 className="mt-8 text-2xl font-bold text-white">
-            Verifying...
-          </h3>
-
-          <p className="mt-2 max-w-[250px] text-sm leading-6 text-slate-500">
-            Please wait while we check your answer.
-          </p>
-
-          <div className="mt-8 w-full max-w-[240px]">
-
-            <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
-
-              <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-blue-400" />
-
-            </div>
-
-          </div>
-
-          <div className="mt-20 w-full rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 text-left">
-
-            <div className="flex gap-3">
-
-              <ShieldCheck
-                size={17}
-                className="mt-0.5 shrink-0 text-slate-500"
-              />
-
-              <p className="text-[10px] leading-5 text-slate-500">
-                Do not close this screen while
-                verification is in progress.
               </p>
 
+            </section>
+
+            {/* FLOW */}
+            <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-8">
+
+              <FlowSteps
+                currentStep={selectedOption ? 2 : 1}
+              />
+
+            </div>
+
+            {/* MAIN PHONE */}
+            <div className="mx-auto mt-5 w-full max-w-[390px] sm:mt-7">
+
+              <PhoneShell>
+
+                {/* PHONE HEADER */}
+                <div className="flex min-w-0 items-center justify-between gap-2 px-3 pt-6 sm:px-4 sm:pt-7">
+
+                  <button
+                    type="button"
+                    aria-label="Back"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-sm text-slate-400 transition hover:border-white/15 hover:text-white sm:h-9 sm:w-9"
+                  >
+                    ←
+                  </button>
+
+                  <div className="min-w-0 flex-1 text-center">
+
+                    <p className="truncate text-[13px] font-bold tracking-[0.16em] text-white sm:text-sm">
+                      VELOOP
+                    </p>
+
+                    <p className="text-[6px] font-bold uppercase tracking-[0.22em] text-slate-500 sm:text-[7px]">
+                      Rewards
+                    </p>
+
+                  </div>
+
+                  <div className="flex min-w-0 shrink-0 items-center gap-1 rounded-full border border-amber-300/15 bg-amber-300/[0.05] px-2 py-1.5 sm:gap-1.5 sm:px-2.5">
+
+                    <Gem
+                      size={11}
+                      className="shrink-0 text-amber-300 sm:h-3 sm:w-3"
+                    />
+
+                    <span className="whitespace-nowrap text-[9px] font-bold text-amber-200 sm:text-[10px]">
+                      {Number.isInteger(balance)
+                        ? balance
+                        : balance.toFixed(1)}
+                    </span>
+
+                  </div>
+
+                </div>
+
+                {/* PHONE CONTENT */}
+                <div className="min-w-0 px-3 pb-5 pt-6 sm:px-4 sm:pb-6 sm:pt-8">
+
+                  {/* TITLE */}
+                  <div className="text-center">
+
+                    <h2 className="text-[22px] font-extrabold leading-tight text-white sm:text-2xl">
+
+                      Earn{" "}
+
+                      <span className="text-amber-300">
+                        Gems
+                      </span>
+
+                    </h2>
+
+                    <p className="mx-auto mt-1.5 max-w-[250px] text-[10px] leading-4 text-slate-500 sm:mt-2 sm:text-xs sm:leading-5">
+
+                      Complete a quick security check
+                      to earn rewards.
+
+                    </p>
+
+                  </div>
+
+                  {/* CAPTCHA */}
+                  <div className="mt-5 min-w-0 sm:mt-7">
+
+                    <CaptchaChallenge
+                      captcha={challenge.captcha}
+                    />
+
+                  </div>
+
+                  {/* INSTRUCTION */}
+                  <div className="mt-4 text-center sm:mt-5">
+
+                    <p className="text-[11px] font-semibold text-slate-300 sm:text-xs">
+                      Select the matching code
+                    </p>
+
+                  </div>
+
+                  {/* OPTIONS */}
+                  <div className="mt-2.5 grid min-w-0 grid-cols-2 gap-2 sm:mt-4 sm:gap-2.5">
+
+                    {challenge.options.map(
+                      (option) => (
+                        <div
+                          key={option}
+                          className="min-w-0"
+                        >
+
+                          <CaptchaOption
+                            option={option}
+                            selected={
+                              selectedOption === option
+                            }
+                            disabled={Boolean(
+                              selectedOption
+                            )}
+                            onClick={
+                              handleOptionClick
+                            }
+                          />
+
+                        </div>
+                      )
+                    )}
+
+                  </div>
+
+                  {/* SECURITY */}
+                  <div className="mt-3 min-w-0 rounded-xl border border-white/[0.07] bg-white/[0.025] p-2.5 sm:mt-4 sm:p-3">
+
+                    <div className="flex min-w-0 items-center gap-2">
+
+                      <ShieldCheck
+                        size={14}
+                        className="shrink-0 text-slate-400"
+                      />
+
+                      <p className="min-w-0 text-[9px] leading-4 text-slate-500 sm:text-[10px]">
+
+                        This helps protect your account
+                        from automated access.
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                  {/* REWARD */}
+                  <div className="mt-3 min-w-0 rounded-xl border border-amber-300/20 bg-amber-300/[0.035] p-2.5 sm:mt-4 sm:p-3">
+
+                    <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-300/[0.08] sm:h-9 sm:w-9">
+
+                        <Gem
+                          size={17}
+                          className="text-amber-300 sm:h-[19px] sm:w-[19px]"
+                        />
+
+                      </div>
+
+                      <div className="min-w-0">
+
+                        <p className="truncate text-[9px] font-medium text-slate-400 sm:text-[10px]">
+                          Complete verification to earn
+                        </p>
+
+                        <p className="text-[13px] font-extrabold text-amber-300 sm:text-sm">
+                          +1 Gem
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </PhoneShell>
+
+            </div>
+
+            {/* FEATURE STRIP */}
+            <div className="mx-auto mt-8 hidden max-w-6xl grid-cols-5 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#09111d] lg:grid">
+
+              {[
+                ["🛡", "SECURE", "Advanced protection"],
+                ["🎁", "REWARDING", "Earn Gems"],
+                ["⚡", "FAST", "Quick verification"],
+                ["▣", "MOBILE FIRST", "Optimized experience"],
+                ["🔒", "TRUSTED", "Security first"],
+              ].map(
+                ([icon, title, description]) => (
+                  <div
+                    key={title}
+                    className="border-r border-white/[0.06] p-5 text-center last:border-r-0"
+                  >
+
+                    <div className="text-xl">
+                      {icon}
+                    </div>
+
+                    <p className="mt-2 text-[10px] font-bold tracking-[0.12em] text-slate-300">
+                      {title}
+                    </p>
+
+                    <p className="mt-1 text-[9px] text-slate-600">
+                      {description}
+                    </p>
+
+                  </div>
+                )
+              )}
+
             </div>
 
           </div>
 
-        </div>
+        </main>
+      )}
 
-      </PhoneShell>
+      {/* =========================================================
+          VERIFYING SCREEN
+      ========================================================== */}
+      {screen === "verifying" && (
+        <main className="relative z-10 w-full">
 
-    </div>
+          <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
 
-  </main>
-)}
+            <section className="mx-auto w-full max-w-4xl text-center">
+
+              <div className="mb-2 flex items-center justify-center gap-2 sm:mb-3">
+
+                <Gem
+                  size={18}
+                  className="text-amber-300 sm:h-5 sm:w-5"
+                />
+
+                <span className="text-[11px] font-bold tracking-[0.18em] text-white sm:text-sm sm:tracking-[0.22em]">
+                  VELOOP REWARDS
+                </span>
+
+              </div>
+
+              <h1 className="text-[clamp(27px,7vw,56px)] font-black uppercase leading-[0.98] tracking-[-0.045em] text-white">
+
+                CAPTCHA{" "}
+
+                <span className="text-purple-300">
+                  EARN FLOW
+                </span>
+
+              </h1>
+
+              <p className="mt-2 text-[10px] font-medium text-slate-500 sm:text-sm">
+                Secure Verification
+                <span className="mx-1.5 sm:mx-2">•</span>
+                Earn Rewards
+                <span className="mx-1.5 sm:mx-2">•</span>
+                Build Trust
+              </p>
+
+            </section>
+
+            <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-8">
+              <FlowSteps currentStep={3} />
+            </div>
+
+            <div className="mx-auto mt-5 w-full max-w-[390px] sm:mt-7">
+
+              <PhoneShell>
+
+                <div className="flex min-h-[650px] flex-col items-center justify-center px-6 py-10 text-center sm:min-h-[690px] sm:px-7">
+
+                  <div className="relative flex h-32 w-32 items-center justify-center sm:h-36 sm:w-36">
+
+                    <div className="absolute inset-0 animate-pulse rounded-full border border-purple-400/20" />
+
+                    <div className="absolute inset-4 rounded-full border border-purple-400/20" />
+
+                    <div className="absolute inset-8 rounded-full border border-purple-400/20" />
+
+                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-purple-300/20 bg-purple-400/[0.08]">
+
+                      <LockKeyhole
+                        size={30}
+                        className="text-purple-300"
+                      />
+
+                    </div>
+
+                  </div>
+
+                  <h2 className="mt-7 text-2xl font-bold text-white">
+                    Verifying...
+                  </h2>
+
+                  <p className="mt-2 max-w-[240px] text-sm leading-6 text-slate-500">
+                    Please wait while we check your answer.
+                  </p>
+
+                  <div className="mt-7 w-full max-w-[240px]">
+
+                    <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+
+                      <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-blue-400" />
+
+                    </div>
+
+                  </div>
+
+                  <div className="mt-16 w-full rounded-xl border border-white/[0.07] bg-white/[0.025] p-3.5 text-left sm:mt-20 sm:p-4">
+
+                    <div className="flex gap-3">
+
+                      <ShieldCheck
+                        size={17}
+                        className="mt-0.5 shrink-0 text-slate-500"
+                      />
+
+                      <p className="text-[10px] leading-5 text-slate-500">
+                        Do not close this screen while
+                        verification is in progress.
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </PhoneShell>
+
+            </div>
+
+          </div>
+
+        </main>
+      )}
 
       {/* CHECKING */}
       {screen === "checking" && (
-        <main className="relative z-10">
+        <main className="relative z-10 w-full">
           <CheckingScreen />
         </main>
       )}
 
       {/* RESULT */}
       {screen === "result" && (
-        <main className="relative z-10">
+        <main className="relative z-10 w-full">
+
           <ResultScreen
             isCorrect={isCorrect}
             reward={reward}
             onClaim={handleClaim}
             onNoThanks={handleNoThanks}
           />
+
         </main>
       )}
 
       {/* REWARD PROCESSING */}
       {screen === "ad" && (
-        <main className="relative z-10 flex min-h-[calc(100vh-74px)] items-center justify-center px-5">
+        <main className="relative z-10 flex min-h-[calc(100vh-74px)] w-full items-center justify-center px-4 py-8 sm:px-5">
 
-          <div className="w-full max-w-md rounded-3xl border border-white/[0.09] bg-[#09111d] p-8 text-center shadow-[0_25px_80px_rgba(0,0,0,0.4)]">
+          <div className="w-full max-w-md rounded-3xl border border-white/[0.09] bg-[#09111d] p-6 text-center shadow-[0_25px_80px_rgba(0,0,0,0.4)] sm:p-8">
 
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-amber-300/10 bg-amber-300/[0.04]">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-amber-300/10 bg-amber-300/[0.04] sm:h-20 sm:w-20">
 
               <Gem
-                size={28}
-                className="animate-pulse text-amber-300"
+                size={25}
+                className="animate-pulse text-amber-300 sm:h-7 sm:w-7"
               />
 
             </div>
 
-            <p className="mt-6 text-lg font-bold text-white">
+            <p className="mt-5 text-lg font-bold text-white sm:mt-6">
               Preparing your reward
             </p>
 
@@ -488,15 +553,18 @@ function App() {
               Your reward confirmation is being prepared.
             </p>
 
-            <div className="mx-auto mt-7 h-1.5 max-w-xs overflow-hidden rounded-full bg-white/[0.06]">
+            <div className="mx-auto mt-6 h-1.5 max-w-xs overflow-hidden rounded-full bg-white/[0.06] sm:mt-7">
 
               <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-amber-400 to-yellow-200" />
 
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+            <div className="mt-5 flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600 sm:mt-6">
+
               <Sparkles size={12} />
+
               Processing reward
+
             </div>
 
           </div>

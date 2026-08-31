@@ -17,45 +17,39 @@ function ResultScreen({
   const newBalance = previousBalance + reward;
 
   return (
-    <main className="relative min-h-[calc(100vh-68px)] w-full overflow-hidden bg-[#020711]">
+    <main className="relative min-h-[calc(100vh-68px)] w-full min-w-0 overflow-hidden bg-[#020711]">
 
       {/* Background glow */}
       <div
-        className={`pointer-events-none absolute left-1/2 top-24 h-96 w-96 -translate-x-1/2 rounded-full blur-3xl ${
+        className={`pointer-events-none absolute left-1/2 top-24 h-80 w-80 -translate-x-1/2 rounded-full blur-3xl sm:h-96 sm:w-96 ${
           isCorrect
             ? "bg-emerald-500/[0.035]"
             : "bg-red-500/[0.035]"
         }`}
+        aria-hidden="true"
       />
 
       {/* Main container */}
-      <div
-           className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8"
-            style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-       }}
-      >
-        {/* ================================
-            PAGE BRANDING
-        ================================= */}
-        <div className="mb-7 text-center">
+      <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-col items-center px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+
+        {/* PAGE BRANDING */}
+        <div className="mb-6 w-full min-w-0 text-center sm:mb-7">
 
           <div className="mb-2 flex items-center justify-center gap-2">
 
             <Gem
-              size={21}
+              size={19}
               strokeWidth={2}
-              className="text-amber-300"
+              className="shrink-0 text-amber-300 sm:h-[21px] sm:w-[21px]"
             />
 
-            <span className="text-xs font-bold tracking-[0.24em] text-white sm:text-sm">
+            <span className="text-[11px] font-bold tracking-[0.18em] text-white sm:text-sm sm:tracking-[0.24em]">
               VELOOP REWARDS
             </span>
 
           </div>
 
-          <h1 className="text-3xl font-black uppercase tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mx-auto max-w-full break-words text-[28px] font-black uppercase leading-tight tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl">
 
             CAPTCHA{" "}
 
@@ -71,34 +65,27 @@ function ResultScreen({
 
           </h1>
 
-          <p className="mt-2 text-[10px] font-medium tracking-wide text-slate-500 sm:text-xs">
+          <p className="mt-2 flex flex-wrap items-center justify-center gap-x-2 text-[9px] font-medium tracking-wide text-slate-500 sm:text-xs">
 
-            Secure Verification
+            <span>Secure Verification</span>
 
-            <span className="mx-2 text-slate-700">
-              •
-            </span>
+            <span className="text-slate-700">•</span>
 
-            Earn Rewards
+            <span>Earn Rewards</span>
 
-            <span className="mx-2 text-slate-700">
-              •
-            </span>
+            <span className="text-slate-700">•</span>
 
-            Build Trust
+            <span>Build Trust</span>
 
           </p>
 
         </div>
 
-        {/* ================================
-            PROGRESS FLOW
-        ================================= */}
+        {/* PROGRESS FLOW */}
         <div className="mb-8 hidden w-full max-w-5xl md:block">
 
-          <div className="relative flex items-start justify-between">
+          <div className="relative flex min-w-0 items-start justify-between">
 
-            {/* Connecting line */}
             <div className="absolute left-[9%] right-[9%] top-5 h-px bg-white/[0.08]" />
 
             {[
@@ -119,10 +106,9 @@ function ResultScreen({
                   className="relative z-10 flex min-w-0 flex-col items-center"
                 >
 
-                  {/* Number */}
                   <div
                     className={`
-                      flex h-10 w-10 items-center justify-center
+                      flex h-10 w-10 shrink-0 items-center justify-center
                       rounded-full border text-xs font-bold
                       transition-all duration-300
                       ${
@@ -137,11 +123,10 @@ function ResultScreen({
                     {number}
                   </div>
 
-                  {/* Label */}
                   <span
                     className={`
-                      mt-2 text-[8px] font-bold uppercase
-                      tracking-[0.12em] sm:text-[9px]
+                      mt-2 whitespace-nowrap text-[8px] font-bold
+                      uppercase tracking-[0.12em] sm:text-[9px]
                       ${
                         active
                           ? "text-slate-200"
@@ -160,32 +145,18 @@ function ResultScreen({
 
         </div>
 
-        {/* ================================
-            CENTERED RESULT CARD
-        ================================= */}
-        <div
-  style={{
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-  }}
->
-  <div
-    style={{
-      width: "100%",
-      maxWidth: "390px",
-      marginLeft: "auto",
-      marginRight: "auto",
-    }}
-  >
+        {/* RESULT PHONE */}
+        <div className="flex w-full min-w-0 justify-center">
 
-            {/* Phone outer frame */}
+          <div className="w-full min-w-0 max-w-[390px]">
+
+            {/* PHONE FRAME */}
             <div
               className={`
-                relative overflow-hidden rounded-[34px]
-                border bg-[#020711] p-2
+                relative w-full min-w-0 overflow-hidden
+                rounded-[30px] border bg-[#020711] p-1.5
                 shadow-[0_30px_100px_rgba(0,0,0,0.65)]
+                sm:rounded-[34px] sm:p-2
                 ${
                   isCorrect
                     ? "border-emerald-400/20"
@@ -194,11 +165,12 @@ function ResultScreen({
               `}
             >
 
-              {/* Phone screen */}
+              {/* PHONE SCREEN */}
               <div
                 className={`
-                  relative min-h-[680px] overflow-hidden
-                  rounded-[27px] border bg-[#06101c]
+                  relative min-h-[680px] w-full min-w-0 overflow-hidden
+                  rounded-[24px] border bg-[#06101c]
+                  sm:rounded-[27px]
                   ${
                     isCorrect
                       ? "border-emerald-400/[0.08]"
@@ -207,34 +179,36 @@ function ResultScreen({
                 `}
               >
 
-                {/* Subtle screen glow */}
+                {/* Screen glow */}
                 <div
                   className={`
                     pointer-events-none absolute left-1/2 top-20
-                    h-56 w-56 -translate-x-1/2 rounded-full
-                    blur-3xl
+                    h-48 w-48 -translate-x-1/2 rounded-full blur-3xl
+                    sm:h-56 sm:w-56
                     ${
                       isCorrect
                         ? "bg-emerald-400/[0.025]"
                         : "bg-red-400/[0.025]"
                     }
                   `}
+                  aria-hidden="true"
                 />
 
                 {/* Speaker */}
-                <div className="absolute left-1/2 top-2 z-30 h-1 w-14 -translate-x-1/2 rounded-full bg-white/10" />
+                <div
+                  className="absolute left-1/2 top-2 z-30 h-1 w-14 -translate-x-1/2 rounded-full bg-white/10"
+                  aria-hidden="true"
+                />
 
-                {/* ================================
-                    MOBILE HEADER
-                ================================= */}
-                <div className="relative z-10 flex items-center justify-between px-4 pt-7">
+                {/* MOBILE HEADER */}
+                <div className="relative z-10 flex min-w-0 items-center justify-between gap-2 px-3 pt-7 sm:px-4">
 
                   {/* Back */}
                   <button
                     type="button"
                     onClick={onNoThanks}
                     aria-label="Go back"
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-400 transition hover:border-white/[0.15] hover:bg-white/[0.05] hover:text-white"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-400 transition hover:border-white/[0.15] hover:bg-white/[0.05] hover:text-white sm:h-9 sm:w-9"
                   >
                     <span className="text-lg leading-none">
                       ←
@@ -242,27 +216,27 @@ function ResultScreen({
                   </button>
 
                   {/* Logo */}
-                  <div className="text-center">
+                  <div className="min-w-0 flex-1 text-center">
 
-                    <p className="text-sm font-bold tracking-[0.16em] text-white">
+                    <p className="truncate text-[13px] font-bold tracking-[0.16em] text-white sm:text-sm">
                       VELOOP
                     </p>
 
-                    <p className="text-[7px] font-bold uppercase tracking-[0.22em] text-slate-500">
+                    <p className="text-[6px] font-bold uppercase tracking-[0.22em] text-slate-500 sm:text-[7px]">
                       Rewards
                     </p>
 
                   </div>
 
                   {/* Balance */}
-                  <div className="flex items-center gap-1.5 rounded-full border border-amber-300/15 bg-amber-300/[0.05] px-2.5 py-1.5">
+                  <div className="flex shrink-0 items-center gap-1 rounded-full border border-amber-300/15 bg-amber-300/[0.05] px-2 py-1.5 sm:gap-1.5 sm:px-2.5">
 
                     <Gem
-                      size={12}
-                      className="text-amber-300"
+                      size={11}
+                      className="shrink-0 text-amber-300 sm:h-3 sm:w-3"
                     />
 
-                    <span className="text-[10px] font-bold text-amber-200">
+                    <span className="whitespace-nowrap text-[9px] font-bold text-amber-200 sm:text-[10px]">
                       {previousBalance.toFixed(2)}
                     </span>
 
@@ -270,16 +244,14 @@ function ResultScreen({
 
                 </div>
 
-                {/* ================================
-                    RESULT CONTENT
-                ================================= */}
-                <div className="relative z-10 flex min-h-[590px] flex-col items-center px-5 pb-5 pt-10 text-center">
+                {/* RESULT CONTENT */}
+                <div className="relative z-10 flex min-w-0 min-h-[590px] flex-col items-center px-3 pb-4 pt-8 text-center sm:px-5 sm:pb-5 sm:pt-10">
 
-                  {/* Result icon */}
+                  {/* RESULT ICON */}
                   <div
                     className={`
-                      relative flex h-32 w-32 items-center
-                      justify-center rounded-full
+                      relative flex h-28 w-28 shrink-0 items-center
+                      justify-center rounded-full sm:h-32 sm:w-32
                       ${
                         isCorrect
                           ? "border border-emerald-400/20 bg-emerald-400/[0.035]"
@@ -288,7 +260,6 @@ function ResultScreen({
                     `}
                   >
 
-                    {/* Outer ring */}
                     <div
                       className={`
                         absolute inset-3 rounded-full border
@@ -300,7 +271,6 @@ function ResultScreen({
                       `}
                     />
 
-                    {/* Middle ring */}
                     <div
                       className={`
                         absolute inset-7 rounded-full border
@@ -312,11 +282,10 @@ function ResultScreen({
                       `}
                     />
 
-                    {/* Inner circle */}
                     <div
                       className={`
-                        flex h-16 w-16 items-center
-                        justify-center rounded-full
+                        flex h-14 w-14 items-center
+                        justify-center rounded-full sm:h-16 sm:w-16
                         ${
                           isCorrect
                             ? "bg-emerald-400/[0.10]"
@@ -327,15 +296,15 @@ function ResultScreen({
 
                       {isCorrect ? (
                         <Check
-                          size={36}
+                          size={32}
                           strokeWidth={2.5}
-                          className="text-emerald-300"
+                          className="text-emerald-300 sm:h-9 sm:w-9"
                         />
                       ) : (
                         <X
-                          size={36}
+                          size={32}
                           strokeWidth={2.5}
-                          className="text-red-300"
+                          className="text-red-300 sm:h-9 sm:w-9"
                         />
                       )}
 
@@ -343,11 +312,11 @@ function ResultScreen({
 
                   </div>
 
-                  {/* Heading */}
+                  {/* HEADING */}
                   <h2
                     className={`
-                      mt-7 text-[22px] font-extrabold
-                      tracking-tight sm:text-2xl
+                      mt-6 max-w-full break-words text-[19px]
+                      font-extrabold tracking-tight sm:mt-7 sm:text-2xl
                       ${
                         isCorrect
                           ? "text-emerald-300"
@@ -360,8 +329,8 @@ function ResultScreen({
                       : "Verification Unsuccessful"}
                   </h2>
 
-                  {/* Description */}
-                  <p className="mt-2 max-w-[280px] text-[11px] leading-5 text-slate-500">
+                  {/* DESCRIPTION */}
+                  <p className="mt-2 max-w-[270px] break-words text-[10px] leading-5 text-slate-500 sm:max-w-[280px] sm:text-[11px]">
 
                     {isCorrect
                       ? "Your answer matched the CAPTCHA shown. Your reward is ready."
@@ -369,40 +338,37 @@ function ResultScreen({
 
                   </p>
 
-                  {/* ================================
-                      SUCCESS
-                  ================================= */}
+                  {/* SUCCESS */}
                   {isCorrect ? (
                     <>
 
-                      <p className="mt-5 text-[11px] text-slate-500">
+                      <p className="mt-4 text-[10px] text-slate-500 sm:mt-5 sm:text-[11px]">
                         You earned
                       </p>
 
                       {/* Reward */}
-                      <div className="mt-1.5 flex items-center justify-center gap-2">
+                      <div className="mt-1.5 flex min-w-0 items-center justify-center gap-2">
 
                         <Gem
-                          size={25}
+                          size={23}
                           strokeWidth={2}
-                          className="text-amber-300"
+                          className="shrink-0 text-amber-300"
                         />
 
-                        <span className="text-2xl font-black text-amber-300">
+                        <span className="whitespace-nowrap text-xl font-black text-amber-300 sm:text-2xl">
                           +{reward} Gem
                         </span>
 
                       </div>
 
-                      {/* Balance Card */}
-                      <div className="mt-6 w-full rounded-xl border border-white/[0.08] bg-white/[0.025] px-4 py-3.5">
+                      {/* Balance */}
+                      <div className="mt-5 w-full min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.025] px-3 py-3 sm:mt-6 sm:px-4 sm:py-3.5">
 
-                        <div className="flex items-center justify-between">
+                        <div className="flex min-w-0 items-center justify-between gap-2">
 
-                          {/* Previous */}
-                          <div className="text-left">
+                          <div className="min-w-0 text-left">
 
-                            <p className="text-[8px] font-semibold uppercase tracking-[0.1em] text-slate-600">
+                            <p className="truncate text-[7px] font-semibold uppercase tracking-[0.08em] text-slate-600 sm:text-[8px] sm:tracking-[0.1em]">
                               Previous Balance
                             </p>
 
@@ -412,16 +378,14 @@ function ResultScreen({
 
                           </div>
 
-                          {/* Arrow */}
                           <ArrowRight
-                            size={20}
-                            className="text-slate-500"
+                            size={18}
+                            className="shrink-0 text-slate-500"
                           />
 
-                          {/* New */}
-                          <div className="text-right">
+                          <div className="min-w-0 text-right">
 
-                            <p className="text-[8px] font-semibold uppercase tracking-[0.1em] text-slate-600">
+                            <p className="truncate text-[7px] font-semibold uppercase tracking-[0.08em] text-slate-600 sm:text-[8px] sm:tracking-[0.1em]">
                               New Balance
                             </p>
 
@@ -435,22 +399,22 @@ function ResultScreen({
 
                       </div>
 
-                      {/* Buttons */}
-                      <div className="mt-3.5 w-full space-y-2.5">
+                      {/* BUTTONS */}
+                      <div className="mt-3 w-full min-w-0 space-y-2 sm:mt-3.5 sm:space-y-2.5">
 
                         <button
                           type="button"
                           onClick={onClaim}
-                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 px-4 py-3.5 text-sm font-bold text-slate-950 shadow-[0_8px_25px_rgba(16,185,129,0.15)] transition hover:brightness-110 active:scale-[0.98]"
+                          className="flex w-full min-w-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 px-3 py-3 text-[13px] font-bold text-slate-950 shadow-[0_8px_25px_rgba(16,185,129,0.15)] transition hover:brightness-110 active:scale-[0.98] sm:px-4 sm:py-3.5 sm:text-sm"
                         >
-                          Add to Balance
-                          <ArrowRight size={15} />
+                          <span>Add to Balance</span>
+                          <ArrowRight size={14} className="shrink-0" />
                         </button>
 
                         <button
                           type="button"
                           onClick={onNoThanks}
-                          className="w-full rounded-xl border border-white/[0.09] bg-white/[0.02] px-4 py-3 text-sm font-semibold text-slate-300 transition hover:border-white/[0.14] hover:bg-white/[0.05]"
+                          className="w-full min-w-0 rounded-xl border border-white/[0.09] bg-white/[0.02] px-3 py-2.5 text-[13px] font-semibold text-slate-300 transition hover:border-white/[0.14] hover:bg-white/[0.05] sm:px-4 sm:py-3 sm:text-sm"
                         >
                           Maybe Later
                         </button>
@@ -459,21 +423,19 @@ function ResultScreen({
 
                     </>
                   ) : (
-                    /* ================================
-                       INCORRECT
-                    ================================= */
+                    /* INCORRECT */
                     <>
 
-                      <p className="mt-6 max-w-[250px] text-[11px] leading-5 text-slate-500">
+                      <p className="mt-5 max-w-[240px] break-words text-[10px] leading-5 text-slate-500 sm:mt-6 sm:text-[11px]">
                         Please try again with a new challenge.
                       </p>
 
-                      <div className="mt-7 w-full space-y-2.5">
+                      <div className="mt-6 w-full min-w-0 space-y-2 sm:mt-7 sm:space-y-2.5">
 
                         <button
                           type="button"
                           onClick={onNoThanks}
-                          className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-500 to-rose-400 px-4 py-3.5 text-sm font-bold text-white shadow-[0_8px_25px_rgba(239,68,68,0.12)] transition hover:brightness-110 active:scale-[0.98]"
+                          className="flex w-full min-w-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-500 to-rose-400 px-3 py-3 text-[13px] font-bold text-white shadow-[0_8px_25px_rgba(239,68,68,0.12)] transition hover:brightness-110 active:scale-[0.98] sm:px-4 sm:py-3.5 sm:text-sm"
                         >
                           Try Again
                         </button>
@@ -481,10 +443,10 @@ function ResultScreen({
                         <button
                           type="button"
                           onClick={onNoThanks}
-                          className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/[0.09] bg-white/[0.02] px-4 py-3 text-sm font-semibold text-slate-300 transition hover:border-white/[0.14] hover:bg-white/[0.05]"
+                          className="flex w-full min-w-0 items-center justify-center gap-2 rounded-xl border border-white/[0.09] bg-white/[0.02] px-3 py-2.5 text-[13px] font-semibold text-slate-300 transition hover:border-white/[0.14] hover:bg-white/[0.05] sm:px-4 sm:py-3 sm:text-sm"
                         >
-                          <RefreshCw size={14} />
-                          Get New Code
+                          <RefreshCw size={14} className="shrink-0" />
+                          <span>Get New Code</span>
                         </button>
 
                       </div>
@@ -492,21 +454,19 @@ function ResultScreen({
                     </>
                   )}
 
-                  {/* ================================
-                      SECURITY FOOTER
-                  ================================= */}
-                  <div className="mt-auto w-full pt-5">
+                  {/* SECURITY FOOTER */}
+                  <div className="mt-auto w-full min-w-0 pt-4 sm:pt-5">
 
-                    <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-3">
+                    <div className="rounded-xl border border-white/[0.07] bg-white/[0.025] p-2.5 sm:p-3">
 
-                      <div className="flex items-center gap-2.5 text-left">
+                      <div className="flex min-w-0 items-center gap-2.5 text-left">
 
                         <ShieldCheck
-                          size={16}
+                          size={15}
                           className="shrink-0 text-slate-500"
                         />
 
-                        <p className="text-[9px] leading-4 text-slate-500">
+                        <p className="min-w-0 break-words text-[8px] leading-4 text-slate-500 sm:text-[9px]">
 
                           {isCorrect
                             ? "Your reward has been successfully added to the verification flow."
@@ -530,9 +490,7 @@ function ResultScreen({
 
         </div>
 
-        {/* ================================
-            DESKTOP FEATURE STRIP
-        ================================= */}
+        {/* DESKTOP FEATURE STRIP */}
         <div className="mt-8 hidden w-full max-w-5xl overflow-hidden rounded-2xl border border-white/[0.07] bg-[#09111d] md:grid md:grid-cols-5">
 
           {[
@@ -545,14 +503,11 @@ function ResultScreen({
 
             <div
               key={title}
-              className={`
-                p-4 text-center
-                ${
-                  index !== 4
-                    ? "border-r border-white/[0.06]"
-                    : ""
-                }
-              `}
+              className={`p-4 text-center ${
+                index !== 4
+                  ? "border-r border-white/[0.06]"
+                  : ""
+              }`}
             >
 
               <div className="text-lg">
@@ -573,7 +528,6 @@ function ResultScreen({
 
         </div>
 
-        {/* Bottom spacing */}
         <div className="h-4" />
 
       </div>

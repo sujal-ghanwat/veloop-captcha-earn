@@ -3,10 +3,9 @@ import { Gem, ShieldCheck } from "lucide-react";
 function Header({ balance }) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#050a12]/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-[74px] max-w-6xl items-center justify-between px-5 sm:px-8">
-
+      <div className="mx-auto flex h-[74px] w-full min-w-0 max-w-6xl items-center justify-between gap-2 px-3 sm:px-8">
         {/* Brand */}
-        <div className="flex items-center gap-3">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-amber-400/20 bg-amber-400/10">
             <Gem
               size={19}
@@ -17,8 +16,8 @@ function Header({ balance }) {
             <div className="absolute inset-0 rounded-xl bg-amber-400/10 blur-xl" />
           </div>
 
-          <div>
-            <h1 className="text-[16px] font-bold tracking-[0.12em] text-white">
+          <div className="min-w-0">
+              <h1 className="text-[16px] font-bold tracking-[0.12em] text-white">
               VELOOP
             </h1>
 
@@ -41,8 +40,7 @@ function Header({ balance }) {
         </div>
 
         {/* Balance */}
-        <div className="flex items-center gap-3 rounded-xl border border-white/[0.09] bg-white/[0.035] px-3 py-2">
-
+        <div className="flex shrink-0 items-center gap-2 rounded-xl border border-white/[0.09] bg-white/[0.035] px-2 py-1.5 sm:gap-3 sm:px-3 sm:py-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400/10">
             <Gem
               size={15}
