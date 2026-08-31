@@ -100,8 +100,7 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#050a12] text-white">
-
+    <div className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#050a12] text-white">
       <Header balance={balance} />
 
       {/* Ambient background */}
@@ -117,8 +116,7 @@ function App() {
       {screen === "captcha" && (
   <main className="relative z-10">
 
-    <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8 sm:py-12">
-
+    <div className="mx-auto w-full min-w-0 max-w-7xl px-3 py-6 sm:px-8 sm:py-12">
       {/* Brand heading */}
       <div className="mb-8 text-center">
 
@@ -135,8 +133,7 @@ function App() {
 
         </div>
 
-        <h2 className="text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">
-
+        <h2 className="text-[27px] font-black uppercase leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl">
           CAPTCHA{" "}
 
           <span className="bg-gradient-to-r from-white via-slate-200 to-blue-400 bg-clip-text text-transparent">
@@ -145,7 +142,7 @@ function App() {
 
         </h2>
 
-        <p className="mt-2 text-xs font-medium text-slate-500 sm:text-sm">
+        <p className="mx-auto mt-2 max-w-[300px] text-[10px] font-medium leading-4 text-slate-500 sm:max-w-none sm:text-sm">
           Secure Verification
           <span className="mx-2 text-slate-700">•</span>
           Earn Rewards
@@ -162,8 +159,7 @@ function App() {
       <PhoneShell>
 
         {/* Mobile header */}
-        <div className="flex items-center justify-between px-4 pt-7">
-
+        <div className="flex min-w-0 items-center justify-between gap-2 px-3 pt-6 sm:px-4 sm:pt-7">
           <button
             type="button"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-slate-400"
@@ -171,7 +167,7 @@ function App() {
             ←
           </button>
 
-          <div className="text-center">
+          <div className="min-w-0 flex-1 text-center">
 
             <p className="text-sm font-bold tracking-[0.16em] text-white">
               VELOOP
@@ -183,8 +179,7 @@ function App() {
 
           </div>
 
-          <div className="flex items-center gap-1.5 rounded-full border border-amber-300/15 bg-amber-300/[0.05] px-2.5 py-1.5">
-
+          <div className="flex shrink-0 items-center gap-1 rounded-full border border-amber-300/15 bg-amber-300/[0.05] px-2 py-1.5 sm:gap-1.5 sm:px-2.5">
             <Gem
               size={12}
               className="text-amber-300"
@@ -201,7 +196,7 @@ function App() {
         </div>
 
         {/* Content */}
-        <div className="px-4 pb-5 pt-9">
+        <div className="px-3 pb-4 pt-7 sm:px-4 sm:pb-5 sm:pt-9">
 
           {/* Heading */}
           <div className="text-center">
@@ -224,7 +219,7 @@ function App() {
           </div>
 
           {/* CAPTCHA */}
-          <div className="mt-7">
+          <div className="mt-5 sm:mt-7">
 
             <CaptchaChallenge
               captcha={challenge.captcha}
@@ -242,8 +237,7 @@ function App() {
           </div>
 
           {/* Options */}
-          <div className="mt-4 grid grid-cols-2 gap-2.5">
-
+          <div className="mt-3 grid min-w-0 grid-cols-2 gap-2 sm:mt-4 sm:gap-2.5">
             {challenge.options.map((option) => (
               <CaptchaOption
                 key={option}
