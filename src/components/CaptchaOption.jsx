@@ -1,83 +1,22 @@
-import { Check, LockKeyhole } from "lucide-react";
+import { Check } from 'lucide-react';
 
-function CaptchaOption({
-  option,
-  selected,
-  disabled,
-  onClick,
-}) {
+function CaptchaOption({ option, selected, disabled, onClick }) {
   return (
     <button
       type="button"
       disabled={disabled}
       onClick={() => onClick(option)}
-      className={`
-        group relative w-full overflow-hidden rounded-xl
-        border p-4 text-left
-        transition-all duration-200
-        focus:outline-none focus:ring-2 focus:ring-blue-400/30
-        ${
-          selected
-            ? "border-cyan-400/50 bg-cyan-400/[0.08] shadow-[0_0_25px_rgba(34,211,238,0.08)]"
-            : "border-white/[0.08] bg-white/[0.025] hover:border-blue-400/25 hover:bg-blue-400/[0.04]"
-        }
-        ${
-          disabled && !selected
-            ? "cursor-not-allowed opacity-50"
-            : "cursor-pointer"
-        }
-      `}
+      className={`group relative flex min-h-[58px] w-full items-center justify-between rounded-xl border px-3 py-2.5 text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-400/30 sm:min-h-[62px] sm:px-3.5 ${
+        selected
+          ? 'border-cyan-300/80 bg-cyan-400/[0.09] shadow-[0_0_22px_rgba(34,211,238,.10)]'
+          : 'border-white/[0.12] bg-[#08121e] hover:-translate-y-0.5 hover:border-blue-300/45 hover:bg-blue-400/[0.06]'
+      } ${disabled && !selected ? 'cursor-not-allowed opacity-45' : 'cursor-pointer'}`}
     >
-
-      <div className="flex items-center justify-between gap-3">
-
-        <div className="flex items-center gap-3">
-
-          <div
-            className={`
-              flex h-8 w-8 items-center justify-center
-              rounded-lg border text-[10px] font-bold
-              ${
-                selected
-                  ? "border-cyan-400/20 bg-cyan-400/10 text-cyan-300"
-                  : "border-white/[0.07] bg-white/[0.03] text-slate-500"
-              }
-            `}
-          >
-            <LockKeyhole size={13} />
-          </div>
-
-          <span
-            className={`
-              font-mono text-sm font-semibold tracking-wide
-              ${
-                selected
-                  ? "text-cyan-200"
-                  : "text-slate-300"
-              }
-            `}
-          >
-            {option}
-          </span>
-
-        </div>
-
-        {selected && (
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-400/10">
-            <Check
-              size={15}
-              className="text-cyan-300"
-            />
-          </div>
-        )}
-
-      </div>
-
-      {/* hover accent */}
-      {!disabled && !selected && (
-        <div className="absolute inset-x-0 bottom-0 h-px scale-x-0 bg-gradient-to-r from-transparent via-blue-400/60 to-transparent transition-transform duration-300 group-hover:scale-x-100" />
-      )}
-
+      <span className={`font-mono text-[12px] font-semibold tracking-wide sm:text-sm ${selected ? 'text-cyan-100' : 'text-slate-200'}`}>
+        {option}
+      </span>
+      {selected && <span className="flex h-6 w-6 items-center justify-center rounded-full bg-cyan-300/15"><Check size={14} className="text-cyan-200" /></span>}
+      {!selected && <span className="h-2 w-2 rounded-full border border-slate-600 transition group-hover:border-blue-300" />}
     </button>
   );
 }

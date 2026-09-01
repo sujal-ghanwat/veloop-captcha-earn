@@ -10,11 +10,12 @@ import {
 function ResultScreen({
   isCorrect,
   reward,
+  balance,
   onClaim,
   onNoThanks,
 }) {
-  const previousBalance = 125.5;
-  const newBalance = previousBalance + reward;
+ const previousBalance = balance;
+const newBalance = previousBalance + reward;
 
   return (
     <main className="relative min-h-[calc(100vh-68px)] w-full min-w-0 overflow-hidden bg-[#020711]">

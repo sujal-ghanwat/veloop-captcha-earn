@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
 import {
-  ArrowRight,
-  Check,
   Gem,
   LockKeyhole,
-  RefreshCw,
-  ShieldCheck,
   Sparkles,
-  Zap,
-  X,
 } from "lucide-react";
 
 import Header from "./components/Header";
 import CaptchaChallenge from "./components/CaptchaChallenge";
 import CaptchaOption from "./components/CaptchaOption";
-import RewardIndicator from "./components/RewardIndicator";
 import CheckingScreen from "./components/CheckingScreen";
 import ResultScreen from "./components/ResultScreen";
 import FlowSteps from "./components/FlowSteps";
@@ -22,19 +15,37 @@ import PhoneShell from "./components/PhoneShell";
 import { generateCaptcha } from "./data/captchaData";
 
 function App() {
+  // ================================
+  // BALANCE
+  // ================================
   const [balance, setBalance] = useState(124);
 
+  // ================================
+  // CAPTCHA
+  // ================================
   const [challenge, setChallenge] = useState(() =>
     generateCaptcha()
   );
 
   const [selectedOption, setSelectedOption] = useState(null);
+
+  // Screens:
+  // captcha
+  // verifying
+  // checking
+  // result
+  // ad
   const [screen, setScreen] = useState("captcha");
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [reward, setReward] = useState(0);
 
+  // ================================
+  // SELECT ANSWER
+  // ================================
   const handleOptionClick = (option) => {
+    // Don't allow another selection while processing
     if (isProcessing || selectedOption) {
       return;
     }
@@ -43,19 +54,26 @@ function App() {
     setIsProcessing(true);
     setScreen("verifying");
 
+    // Simulate verification
     setTimeout(() => {
       const correct =
         option === challenge.correctAnswer;
 
       setIsCorrect(correct);
 
+      // Correct = 1 Gem
+      // Incorrect = 0.5 Gem
       const earnedReward = correct ? 1 : 0.5;
 
       setReward(earnedReward);
 
-      setBalance((currentBalance) =>
-        currentBalance + earnedReward
-      );
+      /*
+        IMPORTANT:
+        DO NOT update balance here.
+
+        Balance should increase ONLY after
+        clicking "Add to Balance".
+      */
 
       setScreen("checking");
 
@@ -66,6 +84,9 @@ function App() {
     }, 700);
   };
 
+  // ================================
+  // GENERATE NEW CAPTCHA
+  // ================================
   const generateNewChallenge = () => {
     const newChallenge = generateCaptcha(
       challenge.captcha
@@ -79,14 +100,35 @@ function App() {
     setScreen("captcha");
   };
 
+  // ================================
+  // ADD REWARD TO BALANCE
+  // ================================
   const handleClaim = () => {
+    /*
+      Balance is updated ONLY here.
+
+      This means the balance will stay unchanged
+      until the user clicks "Add to Balance".
+    */
+    setBalance(
+      (currentBalance) =>
+        currentBalance + reward
+    );
+
+    // Move to reward processing screen
     setScreen("ad");
   };
 
+  // ================================
+  // MAYBE LATER / TRY AGAIN
+  // ================================
   const handleNoThanks = () => {
     generateNewChallenge();
   };
 
+  // ================================
+  // REWARD PROCESSING
+  // ================================
   useEffect(() => {
     if (screen !== "ad") {
       return;
@@ -100,28 +142,39 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="min-h-screen w-full max-w-full min-w-0 overflow-x-clip bg-[#050a12] text-white">
-      {/* HEADER */}
+    <div className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#050a12] text-white">
+
+      {/* =========================================================
+          HEADER
+      ========================================================== */}
+
       <Header balance={balance} />
 
-      {/* AMBIENT BACKGROUND */}
+      {/* =========================================================
+          AMBIENT BACKGROUND
+      ========================================================== */}
+
       <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
+
         <div className="absolute left-[8%] top-24 h-72 w-72 rounded-full bg-blue-500/[0.055] blur-[110px]" />
 
         <div className="absolute right-[8%] top-[38%] h-80 w-80 rounded-full bg-purple-500/[0.045] blur-[120px]" />
 
         <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-400/[0.025] blur-[110px]" />
+
       </div>
 
       {/* =========================================================
           CAPTCHA SCREEN
       ========================================================== */}
+
       {screen === "captcha" && (
         <main className="relative z-10 w-full">
 
           <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
 
             {/* BRAND */}
+
             <section className="mx-auto w-full max-w-4xl text-center">
 
               <div className="mb-2 flex items-center justify-center gap-2 sm:mb-3">
@@ -169,6 +222,7 @@ function App() {
             </section>
 
             {/* FLOW */}
+
             <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-8">
 
               <FlowSteps
@@ -178,11 +232,12 @@ function App() {
             </div>
 
             {/* MAIN PHONE */}
-            <div className="mx-auto mt-5 w-full max-w-[390px] sm:mt-7">
 
+            <div className="mx-auto mt-4 w-full max-w-[390px] sm:mt-5 lg:mt-3">
               <PhoneShell>
 
                 {/* PHONE HEADER */}
+
                 <div className="flex min-w-0 items-center justify-between gap-2 px-3 pt-6 sm:px-4 sm:pt-7">
 
                   <button
@@ -223,9 +278,11 @@ function App() {
                 </div>
 
                 {/* PHONE CONTENT */}
+
                 <div className="min-w-0 px-3 pb-5 pt-6 sm:px-4 sm:pb-6 sm:pt-8">
 
                   {/* TITLE */}
+
                   <div className="text-center">
 
                     <h2 className="text-[22px] font-extrabold leading-tight text-white sm:text-2xl">
@@ -239,15 +296,14 @@ function App() {
                     </h2>
 
                     <p className="mx-auto mt-1.5 max-w-[250px] text-[10px] leading-4 text-slate-500 sm:mt-2 sm:text-xs sm:leading-5">
-
                       Complete a quick security check
                       to earn rewards.
-
                     </p>
 
                   </div>
 
                   {/* CAPTCHA */}
+
                   <div className="mt-5 min-w-0 sm:mt-7">
 
                     <CaptchaChallenge
@@ -257,6 +313,7 @@ function App() {
                   </div>
 
                   {/* INSTRUCTION */}
+
                   <div className="mt-4 text-center sm:mt-5">
 
                     <p className="text-[11px] font-semibold text-slate-300 sm:text-xs">
@@ -266,6 +323,7 @@ function App() {
                   </div>
 
                   {/* OPTIONS */}
+
                   <div className="mt-2.5 grid min-w-0 grid-cols-2 gap-2 sm:mt-4 sm:gap-2.5">
 
                     {challenge.options.map(
@@ -295,20 +353,19 @@ function App() {
                   </div>
 
                   {/* SECURITY */}
+
                   <div className="mt-3 min-w-0 rounded-xl border border-white/[0.07] bg-white/[0.025] p-2.5 sm:mt-4 sm:p-3">
 
                     <div className="flex min-w-0 items-center gap-2">
 
-                      <ShieldCheck
+                      <LockKeyhole
                         size={14}
                         className="shrink-0 text-slate-400"
                       />
 
                       <p className="min-w-0 text-[9px] leading-4 text-slate-500 sm:text-[10px]">
-
                         This helps protect your account
                         from automated access.
-
                       </p>
 
                     </div>
@@ -316,6 +373,7 @@ function App() {
                   </div>
 
                   {/* REWARD */}
+
                   <div className="mt-3 min-w-0 rounded-xl border border-amber-300/20 bg-amber-300/[0.035] p-2.5 sm:mt-4 sm:p-3">
 
                     <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
@@ -352,6 +410,7 @@ function App() {
             </div>
 
             {/* FEATURE STRIP */}
+
             <div className="mx-auto mt-8 hidden max-w-6xl grid-cols-5 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#09111d] lg:grid">
 
               {[
@@ -393,10 +452,11 @@ function App() {
       {/* =========================================================
           VERIFYING SCREEN
       ========================================================== */}
+
       {screen === "verifying" && (
         <main className="relative z-10 w-full">
 
-          <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+          <div className="mx-auto w-full max-w-7xl px-3 py-5 sm:px-6 sm:py-7 lg:px-8 lg:py-3">
 
             <section className="mx-auto w-full max-w-4xl text-center">
 
@@ -424,17 +484,29 @@ function App() {
               </h1>
 
               <p className="mt-2 text-[10px] font-medium text-slate-500 sm:text-sm">
+
                 Secure Verification
-                <span className="mx-1.5 sm:mx-2">•</span>
+
+                <span className="mx-1.5 sm:mx-2">
+                  •
+                </span>
+
                 Earn Rewards
-                <span className="mx-1.5 sm:mx-2">•</span>
+
+                <span className="mx-1.5 sm:mx-2">
+                  •
+                </span>
+
                 Build Trust
+
               </p>
 
             </section>
 
             <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-8">
+
               <FlowSteps currentStep={3} />
+
             </div>
 
             <div className="mx-auto mt-5 w-full max-w-[390px] sm:mt-7">
@@ -484,7 +556,7 @@ function App() {
 
                     <div className="flex gap-3">
 
-                      <ShieldCheck
+                      <LockKeyhole
                         size={17}
                         className="mt-0.5 shrink-0 text-slate-500"
                       />
@@ -509,20 +581,29 @@ function App() {
         </main>
       )}
 
-      {/* CHECKING */}
+      {/* =========================================================
+          CHECKING SCREEN
+      ========================================================== */}
+
       {screen === "checking" && (
         <main className="relative z-10 w-full">
+
           <CheckingScreen />
+
         </main>
       )}
 
-      {/* RESULT */}
+      {/* =========================================================
+          RESULT SCREEN
+      ========================================================== */}
+
       {screen === "result" && (
         <main className="relative z-10 w-full">
 
           <ResultScreen
             isCorrect={isCorrect}
             reward={reward}
+            balance={balance}
             onClaim={handleClaim}
             onNoThanks={handleNoThanks}
           />
@@ -530,7 +611,10 @@ function App() {
         </main>
       )}
 
-      {/* REWARD PROCESSING */}
+      {/* =========================================================
+          REWARD PROCESSING
+      ========================================================== */}
+
       {screen === "ad" && (
         <main className="relative z-10 flex min-h-[calc(100vh-74px)] w-full items-center justify-center px-4 py-8 sm:px-5">
 
