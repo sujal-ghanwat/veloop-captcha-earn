@@ -4,6 +4,8 @@ import {
   LockKeyhole,
   ShieldCheck,
   Sparkles,
+  Zap,
+  Smartphone,
 } from "lucide-react";
 
 import Header from "./components/Header";
@@ -17,61 +19,122 @@ import { generateCaptcha } from "./data/captchaData";
 
 function FeatureFooter() {
   const features = [
-    ["🛡", "SECURE", "Advanced protection"],
-    ["🎁", "REWARDING", "Earn Gems"],
-    ["⚡", "FAST", "Quick verification"],
-    ["▣", "MOBILE FIRST", "Optimized experience"],
-    ["🔒", "TRUSTED", "Security first"],
+    {
+      title: "SECURE",
+      description: "Advanced protection",
+      icon: ShieldCheck,
+      iconClass: "text-blue-300",
+      boxClass: "border-blue-400/15 bg-blue-400/[0.06]",
+    },
+    {
+      title: "REWARDING",
+      description: "Earn Gems",
+      icon: Gem,
+      iconClass: "text-amber-300",
+      boxClass: "border-amber-400/15 bg-amber-400/[0.06]",
+    },
+    {
+      title: "FAST",
+      description: "Quick verification",
+      icon: Zap,
+      iconClass: "text-yellow-300",
+      boxClass: "border-yellow-400/15 bg-yellow-400/[0.06]",
+    },
+    {
+      title: "MOBILE FIRST",
+      description: "Optimized experience",
+      icon: Smartphone,
+      iconClass: "text-purple-300",
+      boxClass: "border-purple-400/15 bg-purple-400/[0.06]",
+    },
+    {
+      title: "TRUSTED",
+      description: "Security first",
+      icon: LockKeyhole,
+      iconClass: "text-emerald-300",
+      boxClass: "border-emerald-400/15 bg-emerald-400/[0.06]",
+    },
   ];
 
   return (
-    <div className="mx-auto mt-6 w-full max-w-6xl px-3 pb-6 sm:mt-8 sm:px-6 sm:pb-8 lg:px-8">
-      <div className="grid w-full grid-cols-2 overflow-hidden rounded-2xl border border-white/[0.07] bg-[#09111d] sm:grid-cols-5">
-        {features.map(([icon, title, description], index) => (
-          <div
-            key={title}
-            className={`
-              min-w-0 p-3 text-center sm:p-4
-              ${
-                index === 0
-                  ? "border-r border-white/[0.06]"
-                  : ""
-              }
-              ${
-                index === 1
-                  ? "border-b border-white/[0.06] sm:border-b-0 sm:border-r"
-                  : ""
-              }
-              ${
-                index === 2
-                  ? "border-r border-white/[0.06]"
-                  : ""
-              }
-              ${
-                index === 3
-                  ? "border-b border-white/[0.06] sm:border-b-0 sm:border-r"
-                  : ""
-              }
-              ${
-                index === 4
-                  ? "col-span-2 sm:col-span-1"
-                  : ""
-              }
-            `}
-          >
-            <div className="text-lg sm:text-xl">
-              {icon}
-            </div>
+    <div className="mx-auto mt-5 w-full max-w-6xl px-3 pb-6 sm:mt-7 sm:px-6 sm:pb-8 lg:px-8">
+      <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#09111d] shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
 
-            <p className="mt-1 text-[9px] font-bold tracking-[0.12em] text-slate-300 sm:mt-2 sm:text-[10px]">
-              {title}
-            </p>
+        {/* subtle glow */}
+        <div className="pointer-events-none absolute -left-20 -top-20 h-40 w-40 rounded-full bg-blue-500/[0.05] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-purple-500/[0.05] blur-3xl" />
 
-            <p className="mt-1 break-words text-[8px] leading-4 text-slate-600 sm:text-[9px]">
-              {description}
-            </p>
-          </div>
-        ))}
+        <div className="relative grid grid-cols-2 sm:grid-cols-5">
+
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+
+            return (
+              <div
+                key={feature.title}
+                className={`
+                  group flex min-h-[118px] flex-col items-center justify-center
+                  px-3 py-5 text-center
+                  transition-all duration-300
+                  hover:bg-white/[0.025]
+                  sm:min-h-[135px] sm:px-4
+                  ${
+                    index === 1
+                      ? "border-l border-white/[0.06]"
+                      : ""
+                  }
+                  ${
+                    index === 2
+                      ? "border-t border-white/[0.06] sm:border-l sm:border-t-0"
+                      : ""
+                  }
+                  ${
+                    index === 3
+                      ? "border-l border-t border-white/[0.06] sm:border-t-0"
+                      : ""
+                  }
+                  ${
+                    index === 4
+                      ? "col-span-2 border-t border-white/[0.06] sm:col-span-1 sm:border-l sm:border-t-0"
+                      : ""
+                  }
+                `}
+              >
+                <div
+                  className={`
+                    mb-2.5 flex h-9 w-9 items-center justify-center
+                    rounded-xl border
+                    transition-transform duration-300
+                    group-hover:scale-105
+                    ${feature.boxClass}
+                  `}
+                >
+                  <Icon
+                    size={18}
+                    strokeWidth={1.8}
+                    className={feature.iconClass}
+                  />
+                </div>
+
+                <p className="text-[10px] font-bold tracking-[0.18em] text-slate-200">
+                  {feature.title}
+                </p>
+
+                <p className="mt-1 text-[9px] leading-4 text-slate-500">
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
+
+        </div>
+      </div>
+
+      <div className="mt-2.5 flex items-center justify-center gap-1.5">
+        <LockKeyhole size={10} className="text-slate-600" />
+        <span className="text-[8px] tracking-wide text-slate-600">
+          Built for secure and reliable verification
+        </span>
       </div>
     </div>
   );
