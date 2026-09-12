@@ -417,6 +417,7 @@ function App() {
                   <div className="mt-5 min-w-0 sm:mt-7">
                     <CaptchaChallenge
                       captcha={challenge.captcha}
+                      onRefresh={generateNewChallenge}
                     />
                   </div>
 
