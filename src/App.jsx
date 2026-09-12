@@ -191,7 +191,8 @@ function App() {
 
     setTimeout(() => {
       const correct =
-        option === challenge.correctAnswer;
+  String(option).replace(/\s/g, "").toUpperCase() ===
+  String(challenge.captcha).replace(/\s/g, "").toUpperCase();
 
       setIsCorrect(correct);
 
@@ -293,20 +294,103 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#050a12] text-white">
+    <div className="relative min-h-screen w-full min-w-0 overflow-x-hidden bg-[#030811] text-white">
       <Header balance={balance} />
 
-      {/* ===================================================
-          AMBIENT BACKGROUND
-      =================================================== */}
+     {/* ===================================================
+    PREMIUM AMBIENT BACKGROUND
+=================================================== */}
 
-      <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
-        <div className="absolute left-[8%] top-24 h-72 w-72 rounded-full bg-blue-500/[0.055] blur-[110px]" />
+<div
+  className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+  aria-hidden="true"
+>
+  {/* Base atmosphere */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#0b1730_0%,#050b15_42%,#02050a_100%)]" />
 
-        <div className="absolute right-[8%] top-[38%] h-80 w-80 rounded-full bg-purple-500/[0.045] blur-[120px]" />
+  {/* Electric blue glow */}
+  <div
+    className="
+      absolute -left-40 -top-40
+      h-[520px] w-[520px]
+      rounded-full
+      bg-blue-500/[0.13]
+      blur-[140px]
+    "
+  />
 
-        <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-400/[0.025] blur-[110px]" />
-      </div>
+  {/* Purple glow */}
+  <div
+    className="
+      absolute -right-40 top-[5%]
+      h-[520px] w-[520px]
+      rounded-full
+      bg-purple-500/[0.11]
+      blur-[150px]
+    "
+  />
+
+  {/* Center interaction glow */}
+  <div
+    className="
+      absolute left-1/2 top-[45%]
+      h-[500px] w-[500px]
+      -translate-x-1/2
+      rounded-full
+      bg-blue-400/[0.055]
+      blur-[150px]
+    "
+  />
+
+  {/* Bottom purple atmosphere */}
+  <div
+    className="
+      absolute -bottom-48 left-[8%]
+      h-[500px] w-[500px]
+      rounded-full
+      bg-purple-600/[0.08]
+      blur-[150px]
+    "
+  />
+
+  {/* Gold reward atmosphere */}
+  <div
+    className="
+      absolute -bottom-40 right-[5%]
+      h-[420px] w-[420px]
+      rounded-full
+      bg-amber-400/[0.045]
+      blur-[140px]
+    "
+  />
+
+  {/* Subtle blue light beam */}
+  <div
+    className="
+      absolute left-1/2 top-0
+      h-[1px] w-[70%]
+      -translate-x-1/2
+      bg-gradient-to-r
+      from-transparent
+      via-blue-400/30
+      to-transparent
+      blur-sm
+    "
+  />
+
+  {/* Premium grid */}
+  <div
+    className="
+      absolute inset-0
+      opacity-[0.035]
+      [background-image:linear-gradient(rgba(96,165,250,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,0.45)_1px,transparent_1px)]
+      [background-size:52px_52px]
+    "
+  />
+
+  {/* Soft vignette */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.38)_100%)]" />
+</div>
 
       {/* ===================================================
           CAPTCHA SCREEN
@@ -464,26 +548,111 @@ function App() {
                   </div>
 
                   {/* REWARD */}
-                  <div className="mt-3 min-w-0 rounded-xl border border-amber-300/20 bg-amber-300/[0.035] p-2.5 sm:mt-4 sm:p-3">
-                    <div className="flex min-w-0 items-center gap-2.5">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-300/[0.08]">
-                        <Gem
-                          size={17}
-                          className="text-amber-300"
-                        />
-                      </div>
+<div
+  className="
+    group/reward relative mt-3 min-w-0 overflow-hidden
+    rounded-xl border border-amber-300/20
+    bg-gradient-to-r from-amber-300/[0.08] via-yellow-300/[0.035] to-transparent
+    p-3
+    shadow-[0_0_25px_rgba(251,191,36,0.045)]
+    transition-all duration-300
+    hover:border-amber-300/30
+    hover:shadow-[0_0_32px_rgba(251,191,36,0.08)]
+    sm:mt-4 sm:p-3.5
+  "
+>
+  {/* Gold glow */}
+  <div
+    className="
+      pointer-events-none absolute -right-8 top-1/2
+      h-24 w-24 -translate-y-1/2
+      rounded-full bg-amber-400/[0.10]
+      blur-3xl
+    "
+    aria-hidden="true"
+  />
 
-                      <div className="min-w-0">
-                        <p className="truncate text-[9px] font-medium text-slate-400">
-                          Complete verification to earn
-                        </p>
+  {/* Shine */}
+  <div
+    className="
+      pointer-events-none absolute inset-y-0 left-[-100%]
+      w-1/3 skew-x-[-20deg]
+      bg-gradient-to-r from-transparent via-white/[0.06] to-transparent
+      transition-all duration-1000
+      group-hover/reward:left-[130%]
+    "
+    aria-hidden="true"
+  />
 
-                        <p className="text-[13px] font-extrabold text-amber-300">
-                          +1 Gem
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+  <div className="relative z-10 flex min-w-0 items-center justify-between gap-3">
+
+    {/* Gem */}
+    <div className="flex min-w-0 items-center gap-2.5">
+      <div
+        className="
+          relative flex h-10 w-10 shrink-0
+          items-center justify-center
+          rounded-xl
+          border border-amber-300/25
+          bg-amber-300/[0.10]
+          shadow-[0_0_22px_rgba(251,191,36,0.12)]
+          transition-transform duration-300
+          group-hover/reward:scale-105
+        "
+      >
+        <div
+          className="
+            absolute inset-1 rounded-lg
+            border border-amber-200/10
+            animate-pulse
+          "
+        />
+
+        <Gem
+          size={19}
+          strokeWidth={1.8}
+          className="
+            relative z-10
+            text-amber-300
+            drop-shadow-[0_0_8px_rgba(251,191,36,0.45)]
+          "
+        />
+      </div>
+
+      <div className="min-w-0">
+        <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-amber-200/60">
+          Your reward
+        </p>
+
+        <p className="mt-0.5 text-[12px] font-semibold text-slate-300">
+          Complete verification
+        </p>
+      </div>
+    </div>
+
+    {/* Reward amount */}
+    <div className="shrink-0 text-right">
+      <p className="text-[18px] font-black tracking-tight text-amber-300 drop-shadow-[0_0_10px_rgba(251,191,36,0.25)]">
+        +1
+      </p>
+
+      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-amber-200/50">
+        Gem
+      </p>
+    </div>
+  </div>
+
+  {/* Bottom progress hint */}
+  <div className="relative z-10 mt-3 flex items-center gap-2">
+    <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+      <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-amber-500/70 to-yellow-300/80" />
+    </div>
+
+    <span className="text-[7px] font-bold uppercase tracking-[0.12em] text-slate-600">
+      Ready
+    </span>
+  </div>
+</div>
 
                 </div>
               </PhoneShell>

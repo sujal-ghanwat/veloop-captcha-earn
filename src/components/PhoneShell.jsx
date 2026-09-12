@@ -1,40 +1,55 @@
 function PhoneShell({ children }) {
   return (
-    <div className="mx-auto w-full max-w-[390px] min-w-0 px-1 sm:px-0">
+    <div className="mx-auto w-full min-w-0 max-w-[390px]">
       {/* Premium Phone Frame */}
       <div
         className="
           relative mx-auto w-full min-w-0
           overflow-hidden
-          rounded-[30px]
+          rounded-[28px]
           border border-blue-400/20
           bg-[#020711]
           p-1
-          shadow-[0_25px_80px_rgba(0,0,0,0.55)]
+          shadow-[0_24px_70px_rgba(0,0,0,0.55)]
           transition-all duration-500
-          sm:rounded-[34px] sm:border-blue-400/25 sm:p-1.5
+          sm:rounded-[32px]
+          sm:border-blue-400/25
+          sm:p-1.5
         "
       >
-        {/* Blue outer glow */}
+        {/* Outer blue glow */}
         <div
           className="
             pointer-events-none absolute
             -inset-1
-            rounded-[32px]
-            bg-blue-500/[0.07]
+            rounded-[31px]
+            bg-blue-500/[0.055]
             blur-2xl
           "
           aria-hidden="true"
         />
 
-        {/* Purple secondary glow */}
+        {/* Purple atmospheric glow */}
         <div
           className="
             pointer-events-none absolute
             -bottom-20 -right-16
             h-40 w-40
             rounded-full
-            bg-purple-500/[0.06]
+            bg-purple-500/[0.055]
+            blur-3xl
+          "
+          aria-hidden="true"
+        />
+
+        {/* Gold atmospheric glow */}
+        <div
+          className="
+            pointer-events-none absolute
+            -bottom-16 -left-12
+            h-32 w-32
+            rounded-full
+            bg-amber-400/[0.025]
             blur-3xl
           "
           aria-hidden="true"
@@ -46,14 +61,14 @@ function PhoneShell({ children }) {
             relative z-10
             w-full min-w-0
             overflow-hidden
-            rounded-[25px]
+            rounded-[24px]
             border border-white/[0.07]
             bg-[#06101c]
             shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]
-            sm:rounded-[28px]
+            sm:rounded-[27px]
           "
         >
-          {/* Top speaker / camera area */}
+          {/* Top speaker / camera */}
           <div
             className="
               pointer-events-none absolute
@@ -63,15 +78,16 @@ function PhoneShell({ children }) {
             "
             aria-hidden="true"
           >
-            <span className="h-1 w-8 rounded-full bg-white/[0.10] sm:w-10" />
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-400/20" />
+            <span className="h-1 w-7 rounded-full bg-white/[0.09] sm:w-9" />
+
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-400/20 shadow-[0_0_5px_rgba(96,165,250,0.2)]" />
           </div>
 
-          {/* Top highlight */}
+          {/* Top screen highlight */}
           <div
             className="
               pointer-events-none absolute
-              left-8 right-8 top-0 z-20
+              left-7 right-7 top-0 z-20
               h-px
               bg-gradient-to-r
               from-transparent
@@ -81,6 +97,7 @@ function PhoneShell({ children }) {
             aria-hidden="true"
           />
 
+          {/* Screen content */}
           {children}
         </div>
       </div>
