@@ -6,6 +6,7 @@ import {
   Sparkles,
   Zap,
   Smartphone,
+  CheckCircle2,
 } from "lucide-react";
 
 import Header from "./components/Header";
@@ -16,6 +17,10 @@ import ResultScreen from "./components/ResultScreen";
 import FlowSteps from "./components/FlowSteps";
 import PhoneShell from "./components/PhoneShell";
 import { generateCaptcha } from "./data/captchaData";
+
+/* =========================================================
+   PREMIUM FEATURE FOOTER
+========================================================= */
 
 function FeatureFooter() {
   const features = [
@@ -59,13 +64,12 @@ function FeatureFooter() {
   return (
     <div className="mx-auto mt-5 w-full max-w-6xl px-3 pb-6 sm:mt-7 sm:px-6 sm:pb-8 lg:px-8">
       <div className="relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-[#09111d] shadow-[0_20px_60px_rgba(0,0,0,0.3)]">
-
         {/* subtle glow */}
         <div className="pointer-events-none absolute -left-20 -top-20 h-40 w-40 rounded-full bg-blue-500/[0.05] blur-3xl" />
+
         <div className="pointer-events-none absolute -bottom-20 -right-20 h-40 w-40 rounded-full bg-purple-500/[0.05] blur-3xl" />
 
         <div className="relative grid grid-cols-2 sm:grid-cols-5">
-
           {features.map((feature, index) => {
             const Icon = feature.icon;
 
@@ -126,12 +130,12 @@ function FeatureFooter() {
               </div>
             );
           })}
-
         </div>
       </div>
 
       <div className="mt-2.5 flex items-center justify-center gap-1.5">
         <LockKeyhole size={10} className="text-slate-600" />
+
         <span className="text-[8px] tracking-wide text-slate-600">
           Built for secure and reliable verification
         </span>
@@ -139,6 +143,10 @@ function FeatureFooter() {
     </div>
   );
 }
+
+/* =========================================================
+   APP
+========================================================= */
 
 function App() {
   const [balance, setBalance] = useState(124);
@@ -148,20 +156,25 @@ function App() {
   );
 
   const [selectedOption, setSelectedOption] = useState(null);
+
   const [screen, setScreen] = useState("captcha");
+
   const [isProcessing, setIsProcessing] = useState(false);
+
   const [isCorrect, setIsCorrect] = useState(false);
+
   const [reward, setReward] = useState(0);
 
-  /*
-   * CAPTCHA OPTION
-   *
-   * IMPORTANT:
-   * Balance is NOT changed here.
-   *
-   * Correct answer  = 1 Gem
-   * Incorrect answer = 0.5 Gem
-   */
+  /* =======================================================
+     CAPTCHA OPTION
+     
+     IMPORTANT:
+     Balance is NOT changed here.
+
+     Correct answer   = 1 Gem
+     Incorrect answer = 0.5 Gem
+  ======================================================= */
+
   const handleOptionClick = (option) => {
     if (isProcessing || selectedOption) {
       return;
@@ -169,6 +182,11 @@ function App() {
 
     setSelectedOption(option);
     setIsProcessing(true);
+
+    /*
+      Immediately move to the dedicated
+      verification/loading screen.
+    */
     setScreen("verifying");
 
     setTimeout(() => {
@@ -182,46 +200,62 @@ function App() {
       setReward(earnedReward);
 
       /*
-       * DO NOT add reward to balance here.
-       *
-       * The balance changes ONLY when
-       * the user clicks Add to Balance.
-       */
+        DO NOT update balance here.
 
+        Balance changes ONLY when the user
+        clicks Add to Balance.
+      */
+
+      /*
+        Move to checking screen first so the
+        result transition feels intentional.
+      */
       setScreen("checking");
 
       setTimeout(() => {
+        /*
+          Result is shown as a separate
+          dedicated application screen.
+        */
         setScreen("result");
+
         setIsProcessing(false);
       }, 900);
-    }, 700);
+    }, 1100);
   };
 
-  /*
-   * GENERATE NEW CAPTCHA
-   */
+  /* =======================================================
+     GENERATE NEW CAPTCHA
+  ======================================================= */
+
   const generateNewChallenge = () => {
     const newChallenge = generateCaptcha(
       challenge.captcha
     );
 
     setChallenge(newChallenge);
+
     setSelectedOption(null);
+
     setIsCorrect(false);
+
     setReward(0);
+
     setIsProcessing(false);
+
     setScreen("captcha");
   };
 
-  /*
-   * ADD REWARD TO BALANCE
-   *
-   * THIS IS THE ONLY PLACE WHERE
-   * BALANCE IS UPDATED.
-   *
-   * Correct   -> +1
-   * Incorrect -> +0.5
-   */
+  /* =======================================================
+     ADD REWARD TO BALANCE
+
+     THIS IS THE ONLY PLACE WHERE
+     BALANCE IS UPDATED.
+
+     Correct   -> +1
+     Incorrect -> +0.5
+  ======================================================= */
+
   const handleClaim = () => {
     if (reward <= 0) {
       return;
@@ -234,16 +268,18 @@ function App() {
     setScreen("ad");
   };
 
-  /*
-   * USER DOES NOT WANT REWARD
-   */
+  /* =======================================================
+     USER DOES NOT WANT REWARD
+  ======================================================= */
+
   const handleNoThanks = () => {
     generateNewChallenge();
   };
 
-  /*
-   * REWARD PROCESSING SCREEN
-   */
+  /* =======================================================
+     REWARD PROCESSING SCREEN
+  ======================================================= */
+
   useEffect(() => {
     if (screen !== "ad") {
       return;
@@ -260,9 +296,10 @@ function App() {
     <div className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#050a12] text-white">
       <Header balance={balance} />
 
-      {/* ==========================================
+      {/* ===================================================
           AMBIENT BACKGROUND
-      ========================================== */}
+      =================================================== */}
+
       <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
         <div className="absolute left-[8%] top-24 h-72 w-72 rounded-full bg-blue-500/[0.055] blur-[110px]" />
 
@@ -271,9 +308,10 @@ function App() {
         <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-400/[0.025] blur-[110px]" />
       </div>
 
-      {/* ==========================================
-          CAPTCHA
-      ========================================== */}
+      {/* ===================================================
+          CAPTCHA SCREEN
+      =================================================== */}
+
       {screen === "captcha" && (
         <main className="relative z-10 w-full">
           <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
@@ -329,7 +367,7 @@ function App() {
                     type="button"
                     aria-label="Back"
                     onClick={generateNewChallenge}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-sm text-slate-400 sm:h-9 sm:w-9"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.025] text-sm text-slate-400 transition hover:border-white/[0.15] hover:bg-white/[0.05] hover:text-white sm:h-9 sm:w-9"
                   >
                     ←
                   </button>
@@ -453,13 +491,15 @@ function App() {
         </main>
       )}
 
-      {/* ==========================================
-          VERIFYING
-      ========================================== */}
+      {/* ===================================================
+          PROFESSIONAL VERIFICATION / LOADING SCREEN
+      =================================================== */}
+
       {screen === "verifying" && (
         <main className="relative z-10 w-full">
           <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
 
+            {/* PAGE BRANDING */}
             <section className="mx-auto w-full max-w-4xl text-center">
               <div className="mb-2 flex items-center justify-center gap-2">
                 <Gem
@@ -474,92 +514,176 @@ function App() {
 
               <h1 className="text-[clamp(27px,7vw,56px)] font-black uppercase leading-[0.98] tracking-[-0.045em] text-white">
                 CAPTCHA{" "}
-                <span className="text-purple-300">
+                <span className="bg-gradient-to-r from-purple-300 via-blue-300 to-white bg-clip-text text-transparent">
                   EARN FLOW
                 </span>
               </h1>
 
               <p className="mt-2 text-[10px] font-medium text-slate-500 sm:text-sm">
                 Secure Verification
-                <span className="mx-1.5">•</span>
+                <span className="mx-1.5">
+                  •
+                </span>
                 Earn Rewards
-                <span className="mx-1.5">•</span>
+                <span className="mx-1.5">
+                  •
+                </span>
                 Build Trust
               </p>
             </section>
 
+            {/* PROGRESS FLOW */}
             <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-8">
               <FlowSteps currentStep={3} />
             </div>
 
+            {/* PHONE */}
             <div className="mx-auto mt-5 w-full max-w-[390px] sm:mt-7">
               <PhoneShell>
 
-                <div className="flex min-h-[600px] flex-col items-center justify-center px-5 py-8 text-center sm:min-h-[650px] sm:px-7">
+                <div className="relative flex min-h-[600px] flex-col items-center justify-center overflow-hidden px-5 py-10 text-center sm:min-h-[650px] sm:px-7">
 
-                  <div className="relative flex h-28 w-28 items-center justify-center sm:h-36 sm:w-36">
-                    <div className="absolute inset-0 animate-pulse rounded-full border border-purple-400/20" />
+                  {/* Animated ambient glow */}
+                  <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/[0.06] blur-[80px]" />
 
-                    <div className="absolute inset-4 rounded-full border border-purple-400/20" />
+                  {/* Animated rings */}
+                  <div className="relative flex h-32 w-32 items-center justify-center sm:h-40 sm:w-40">
 
-                    <div className="absolute inset-8 rounded-full border border-purple-400/20" />
+                    <div className="absolute inset-0 animate-ping rounded-full border border-purple-400/10" />
 
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-purple-300/20 bg-purple-400/[0.08]">
+                    <div className="absolute inset-2 rounded-full border border-purple-400/15" />
+
+                    <div className="absolute inset-5 animate-pulse rounded-full border border-blue-400/20" />
+
+                    <div className="absolute inset-8 rounded-full border border-purple-300/20 bg-purple-400/[0.05] shadow-[0_0_45px_rgba(168,85,247,0.12)]" />
+
+                    <div className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-purple-300/25 bg-[#0b1220] shadow-[0_0_30px_rgba(168,85,247,0.12)] sm:h-20 sm:w-20">
+
                       <LockKeyhole
-                        size={30}
-                        className="text-purple-300"
+                        size={29}
+                        strokeWidth={1.8}
+                        className="animate-pulse text-purple-300 sm:h-8 sm:w-8"
                       />
+
                     </div>
                   </div>
 
-                  <h2 className="mt-7 text-2xl font-bold text-white">
-                    Verifying...
-                  </h2>
+                  {/* Main loading title */}
+                  <div className="relative z-10 mt-8">
+                    <div className="flex items-center justify-center gap-2">
+                      <h2 className="text-2xl font-bold text-white sm:text-[26px]">
+                        Verifying
+                      </h2>
 
-                  <p className="mt-2 max-w-[240px] text-sm leading-6 text-slate-500">
-                    Please wait while we check your answer.
-                  </p>
+                      <span className="flex gap-1 pt-2">
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-purple-300 [animation-delay:-0.3s]" />
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-purple-300 [animation-delay:-0.15s]" />
+                        <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-purple-300" />
+                      </span>
+                    </div>
 
-                  <div className="mt-7 w-full max-w-[240px]">
-                    <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
-                      <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-purple-500 to-blue-400" />
+                    <p className="mx-auto mt-2 max-w-[250px] text-sm leading-6 text-slate-500">
+                      Checking your selected answer
+                      and preparing your result.
+                    </p>
+                  </div>
+
+                  {/* Loading progress */}
+                  <div className="relative z-10 mt-8 w-full max-w-[250px]">
+
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-[8px] font-bold uppercase tracking-[0.16em] text-slate-600">
+                        Verification
+                      </span>
+
+                      <span className="text-[8px] font-bold uppercase tracking-[0.16em] text-purple-300">
+                        Processing
+                      </span>
+                    </div>
+
+                    <div className="relative h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+                      <div className="absolute inset-y-0 left-0 w-1/2 animate-pulse rounded-full bg-gradient-to-r from-purple-500 via-blue-400 to-purple-300" />
+
+                      <div className="absolute inset-y-0 left-0 w-full -translate-x-full animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     </div>
                   </div>
 
-                  <div className="mt-12 w-full rounded-xl border border-white/[0.07] bg-white/[0.025] p-3.5 text-left sm:mt-16 sm:p-4">
-                    <div className="flex gap-3">
-                      <ShieldCheck
-                        size={17}
-                        className="mt-0.5 shrink-0 text-slate-500"
-                      />
+                  {/* Status cards */}
+                  <div className="relative z-10 mt-8 w-full max-w-[270px] space-y-2">
 
-                      <p className="text-[10px] leading-5 text-slate-500">
-                        Do not close this screen while
-                        verification is in progress.
-                      </p>
+                    <div className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-2.5 text-left">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-purple-400/[0.08]">
+                        <CheckCircle2
+                          size={14}
+                          className="text-purple-300"
+                        />
+                      </div>
+
+                      <div>
+                        <p className="text-[9px] font-bold text-slate-300">
+                          Answer received
+                        </p>
+
+                        <p className="text-[8px] text-slate-600">
+                          Your selection is being checked
+                        </p>
+                      </div>
                     </div>
+
+                    <div className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.025] px-3 py-2.5 text-left">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-400/[0.08]">
+                        <ShieldCheck
+                          size={14}
+                          className="text-blue-300"
+                        />
+                      </div>
+
+                      <div>
+                        <p className="text-[9px] font-bold text-slate-300">
+                          Security check
+                        </p>
+
+                        <p className="text-[8px] text-slate-600">
+                          Validating verification
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Bottom security note */}
+                  <div className="relative z-10 mt-7 flex items-center justify-center gap-2">
+                    <LockKeyhole
+                      size={11}
+                      className="text-slate-600"
+                    />
+
+                    <p className="text-[8px] tracking-wide text-slate-600">
+                      Please wait while verification completes
+                    </p>
                   </div>
 
                 </div>
-
               </PhoneShell>
             </div>
           </div>
         </main>
       )}
 
-      {/* ==========================================
+      {/* ===================================================
           CHECKING
-      ========================================== */}
+      =================================================== */}
+
       {screen === "checking" && (
         <main className="relative z-10 w-full">
           <CheckingScreen />
         </main>
       )}
 
-      {/* ==========================================
-          RESULT
-      ========================================== */}
+      {/* ===================================================
+          RESULT — SEPARATE SCREEN
+      =================================================== */}
+
       {screen === "result" && (
         <main className="relative z-10 w-full">
           <ResultScreen
@@ -572,33 +696,40 @@ function App() {
         </main>
       )}
 
-      {/* ==========================================
+      {/* ===================================================
           REWARD PROCESSING
-      ========================================== */}
+      =================================================== */}
+
       {screen === "ad" && (
         <main className="relative z-10 flex min-h-[calc(100vh-74px)] w-full items-center justify-center px-4 py-8 sm:px-5">
-          <div className="w-full max-w-md rounded-3xl border border-white/[0.09] bg-[#09111d] p-6 text-center shadow-[0_25px_80px_rgba(0,0,0,0.4)] sm:p-8">
 
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-amber-300/10 bg-amber-300/[0.04] sm:h-20 sm:w-20">
+          <div className="relative w-full max-w-md overflow-hidden rounded-3xl border border-white/[0.09] bg-[#09111d] p-6 text-center shadow-[0_25px_80px_rgba(0,0,0,0.4)] sm:p-8">
+
+            {/* Glow */}
+            <div className="pointer-events-none absolute left-1/2 top-0 h-32 w-32 -translate-x-1/2 rounded-full bg-amber-400/[0.06] blur-3xl" />
+
+            {/* Icon */}
+            <div className="relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-amber-300/10 bg-amber-300/[0.04] sm:h-20 sm:w-20">
               <Gem
                 size={25}
                 className="animate-pulse text-amber-300 sm:h-7 sm:w-7"
               />
             </div>
 
-            <p className="mt-5 text-lg font-bold text-white">
+            <p className="relative mt-5 text-lg font-bold text-white">
               Preparing your reward
             </p>
 
-            <p className="mt-2 text-xs leading-5 text-slate-500">
+            <p className="relative mt-2 text-xs leading-5 text-slate-500">
               Your reward confirmation is being prepared.
             </p>
 
-            <div className="mx-auto mt-6 h-1.5 max-w-xs overflow-hidden rounded-full bg-white/[0.06]">
+            {/* Progress */}
+            <div className="relative mx-auto mt-6 h-1.5 max-w-xs overflow-hidden rounded-full bg-white/[0.06]">
               <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-amber-400 to-yellow-200" />
             </div>
 
-            <div className="mt-5 flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+            <div className="relative mt-5 flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
               <Sparkles size={12} />
               Processing reward
             </div>
@@ -607,10 +738,11 @@ function App() {
         </main>
       )}
 
-      {/* ==========================================
+      {/* ===================================================
           GLOBAL FEATURE FOOTER
           ALWAYS VISIBLE ON MOBILE + DESKTOP
-      ========================================== */}
+      =================================================== */}
+
       <FeatureFooter />
 
     </div>

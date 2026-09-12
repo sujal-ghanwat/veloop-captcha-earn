@@ -1,64 +1,68 @@
 import { Gem, ShieldCheck } from "lucide-react";
 
 function Header({ balance }) {
+  const formattedBalance = Number.isInteger(balance)
+    ? balance
+    : Number(balance).toFixed(1);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/[0.07] bg-[#050a12]/90 backdrop-blur-xl">
-      <div className="mx-auto flex h-[74px] w-full min-w-0 max-w-6xl items-center justify-between gap-2 px-3 sm:px-8">
+    <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-[#020711]/90 backdrop-blur-xl">
+      <div className="mx-auto flex h-[68px] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+
         {/* Brand */}
-        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-amber-400/20 bg-amber-400/10">
+        <div className="flex items-center gap-2.5">
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-amber-300/20 bg-amber-300/[0.06] shadow-[0_0_25px_rgba(251,191,36,0.05)]">
             <Gem
-              size={19}
+              size={18}
               strokeWidth={1.8}
               className="text-amber-300"
             />
 
-            <div className="absolute inset-0 rounded-xl bg-amber-400/10 blur-xl" />
+            <div className="pointer-events-none absolute inset-0 rounded-xl bg-amber-300/10 blur-xl" />
           </div>
 
-          <div className="min-w-0">
-              <h1 className="text-[16px] font-bold tracking-[0.12em] text-white">
+          <div>
+            <p className="text-[14px] font-bold tracking-[0.14em] text-white">
               VELOOP
-            </h1>
+            </p>
 
-            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+            <p className="text-[7px] font-bold uppercase tracking-[0.24em] text-slate-500">
               Rewards
             </p>
           </div>
         </div>
 
-        {/* Security */}
-        <div className="hidden items-center gap-2 rounded-full border border-emerald-400/10 bg-emerald-400/[0.04] px-3 py-1.5 sm:flex">
+        {/* Secure session */}
+        <div className="hidden items-center gap-2 rounded-full border border-emerald-400/10 bg-emerald-400/[0.035] px-3 py-1.5 sm:flex">
           <ShieldCheck
             size={13}
+            strokeWidth={1.8}
             className="text-emerald-400"
           />
 
-          <span className="text-[10px] font-semibold tracking-wide text-emerald-300">
-            Secure session
+          <span className="text-[9px] font-semibold tracking-wide text-emerald-300">
+            Secure Session
           </span>
         </div>
 
         {/* Balance */}
-        <div className="flex shrink-0 items-center gap-2 rounded-xl border border-white/[0.09] bg-white/[0.035] px-2 py-1.5 sm:gap-3 sm:px-3 sm:py-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400/10">
+        <div className="flex items-center gap-2 rounded-full border border-amber-300/15 bg-amber-300/[0.045] px-3 py-1.5 shadow-[0_0_25px_rgba(251,191,36,0.035)]">
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-300/[0.08]">
             <Gem
-              size={15}
+              size={14}
+              strokeWidth={1.8}
               className="text-amber-300"
             />
           </div>
 
           <div>
-            <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-slate-500">
+            <p className="text-[7px] font-bold uppercase tracking-[0.15em] text-slate-600">
               Balance
             </p>
 
-            <p className="text-sm font-bold text-white">
-              {Number.isInteger(balance)
-                ? balance
-                : balance.toFixed(1)}
-
-              <span className="ml-1 text-[11px] font-medium text-slate-500">
+            <p className="text-[12px] font-bold text-amber-200">
+              {formattedBalance}
+              <span className="ml-1 text-[8px] font-medium text-slate-500">
                 Gems
               </span>
             </p>
