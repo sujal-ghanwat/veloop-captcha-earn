@@ -60,7 +60,20 @@ function Header({ balance }) {
         </div>
 
         {/* Balance */}
-        <div className="group relative overflow-hidden rounded-full border border-amber-300/20 bg-gradient-to-r from-amber-300/[0.09] via-yellow-300/[0.045] to-transparent px-2 py-1.5 shadow-[0_0_28px_rgba(251,191,36,0.045)] transition-all duration-300 hover:border-amber-300/35 hover:shadow-[0_0_35px_rgba(251,191,36,0.09)]">
+        <div className="
+  group relative flex min-h-[44px] shrink-0
+  items-center overflow-hidden rounded-full
+  border border-amber-300/20
+  bg-gradient-to-r from-amber-300/[0.09] via-yellow-300/[0.045] to-transparent
+  px-2.5 py-1.5
+  shadow-[0_0_28px_rgba(251,191,36,0.045)]
+  transition-all duration-300
+  touch-manipulation
+  hover:-translate-y-[1px]
+  hover:border-amber-300/35
+  hover:bg-amber-300/[0.11]
+  hover:shadow-[0_0_35px_rgba(251,191,36,0.09)]
+">
 
           {/* Hover shine */}
           <div className="pointer-events-none absolute inset-y-0 -left-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/[0.07] to-transparent transition-all duration-700 group-hover:left-[130%]" />

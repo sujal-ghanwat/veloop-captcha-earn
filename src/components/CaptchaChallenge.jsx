@@ -180,20 +180,33 @@ function CaptchaChallenge({ captcha, onRefresh }) {
         {/* New code */}
         <button
           type="button"
-          onClick={onRefresh}
-          className="
-            group/refresh mx-auto mt-3 flex items-center gap-1.5
-            rounded-lg border border-transparent
-            px-3 py-1.5
-            text-[10px] font-bold
-            text-slate-400
-            transition-all duration-300
-            hover:border-blue-400/15
-            hover:bg-blue-400/[0.06]
-            hover:text-blue-200
-            active:scale-95
-          "
-        >
+         onClick={onRefresh}
+         aria-label="Generate a new CAPTCHA code"
+         className="
+          group/refresh mx-auto mt-3
+         flex min-h-[40px] items-center gap-1.5
+         rounded-xl
+         border border-blue-400/10
+         bg-blue-400/[0.025]
+         px-4 py-2
+         text-[10px] font-bold
+         text-slate-300
+         transition-all duration-300
+         touch-manipulation
+         hover:-translate-y-[1px]
+         hover:border-blue-400/25
+         hover:bg-blue-400/[0.08]
+         hover:text-blue-100
+         hover:shadow-[0_6px_20px_rgba(37,99,235,0.12)]
+         active:translate-y-0
+         active:scale-[0.97]
+         focus-visible:outline-none
+         focus-visible:ring-2
+         focus-visible:ring-blue-400/40
+         focus-visible:ring-offset-2
+         focus-visible:ring-offset-[#06101c]
+        "
+       >
           <RefreshCw
             size={12}
             strokeWidth={2}

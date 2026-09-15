@@ -58,15 +58,17 @@ function PhoneShell({ children }) {
         {/* Phone Screen */}
         <div
           className="
-            relative z-10
-            w-full min-w-0
-            overflow-hidden
-            rounded-[24px]
-            border border-white/[0.07]
-            bg-[#06101c]
-            shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]
-            sm:rounded-[27px]
-          "
+          relative z-10
+          w-full min-w-0
+          min-h-[600px]
+          overflow-hidden
+          rounded-[24px]
+          border border-white/[0.07]
+         bg-[#06101c]
+         shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]
+         sm:min-h-[650px]
+         sm:rounded-[27px]
+        "
         >
           {/* Top speaker / camera */}
           <div

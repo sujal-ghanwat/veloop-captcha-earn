@@ -4,8 +4,7 @@ function CheckingScreen() {
   return (
     <div className="relative flex w-full justify-center px-3 py-5 sm:px-5 sm:py-7">
       <div className="w-full max-w-[360px]">
-        <div className="relative overflow-hidden rounded-[28px] border border-purple-400/20 bg-[#06101c] px-5 py-8 shadow-[0_25px_70px_rgba(0,0,0,0.45)] sm:px-7 sm:py-10">
-
+        <div className="relative overflow-hidden rounded-[28px] border border-purple-400/20 bg-[#06101c] px-4 py-7 shadow-[0_25px_70px_rgba(0,0,0,0.45)] sm:px-7 sm:py-10">
           {/* Ambient glow */}
           <div className="pointer-events-none absolute left-1/2 top-1/3 h-44 w-44 -translate-x-1/2 rounded-full bg-purple-500/[0.08] blur-3xl" />
 
@@ -78,7 +77,7 @@ function CheckingScreen() {
               Verifying...
             </h2>
 
-            <p className="mx-auto mt-2 max-w-[260px] text-[11px] leading-5 text-slate-500 sm:text-xs">
+            <p className="mx-auto mt-2 max-w-[260px] text-[11px] leading-5 text-slate-400 sm:text-xs">
               Please wait while we securely verify your CAPTCHA response.
             </p>
           </div>
@@ -86,7 +85,7 @@ function CheckingScreen() {
           {/* Progress */}
           <div className="relative mt-7">
             <div className="flex items-center justify-between text-[9px]">
-              <span className="font-semibold uppercase tracking-wider text-slate-600">
+              <span className="font-semibold uppercase tracking-wider text-slate-400">
                 Verification
               </span>
 
@@ -110,7 +109,7 @@ function CheckingScreen() {
               />
             </div>
 
-            <div className="mt-2 flex justify-between text-[8px] text-slate-700">
+            <div className="mt-2 flex justify-between text-[8px] text-slate-400">
               <span>Secure connection</span>
               <span>Please wait</span>
             </div>
@@ -131,7 +130,7 @@ function CheckingScreen() {
                 Secure Verification
               </p>
 
-              <p className="mt-0.5 text-[8px] leading-4 text-slate-600">
+              <p className="mt-0.5 text-[8px] leading-4 text-slate-400">
                 Your response is being processed securely.
               </p>
             </div>
@@ -141,7 +140,7 @@ function CheckingScreen() {
           <div className="relative mt-6 flex items-center justify-center gap-2">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple-400" />
 
-            <span className="text-[8px] tracking-wide text-slate-600">
+            <span className="text-[8px] tracking-wide text-slate-400">
               Checking your response...
             </span>
           </div>

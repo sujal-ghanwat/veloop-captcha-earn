@@ -124,7 +124,7 @@ function FeatureFooter() {
                   {feature.title}
                 </p>
 
-                <p className="mt-1 text-[9px] leading-4 text-slate-500">
+                <p className="mt-1 text-[9px] leading-4 text-slate-400">
                   {feature.description}
                 </p>
               </div>
@@ -134,9 +134,9 @@ function FeatureFooter() {
       </div>
 
       <div className="mt-2.5 flex items-center justify-center gap-1.5">
-        <LockKeyhole size={10} className="text-slate-600" />
+        <LockKeyhole size={10} className="text-slate-400" />
 
-        <span className="text-[8px] tracking-wide text-slate-600">
+        <span className="text-[8px] tracking-wide text-slate-400">
           Built for secure and reliable verification
         </span>
       </div>
@@ -397,8 +397,8 @@ function App() {
       =================================================== */}
 
       {screen === "captcha" && (
-        <main className="relative z-10 w-full">
-          <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+        <main className="relative z-10 min-h-[680px] w-full sm:min-h-[760px]">
+          <div className="mx-auto flex min-h-[680px] w-full max-w-7xl flex-col px-3 py-6 sm:min-h-[760px] sm:px-6 sm:py-10 lg:px-8">
 
             {/* PAGE TITLE */}
             <section className="mx-auto w-full max-w-4xl text-center">
@@ -420,7 +420,7 @@ function App() {
                 </span>
               </h1>
 
-              <p className="mx-auto mt-2 max-w-[310px] text-[10px] font-medium leading-4 text-slate-500 sm:max-w-none sm:text-sm sm:leading-5">
+              <p className="mx-auto mt-2 max-w-[310px] text-[10px] font-medium leading-4 text-slate-400 sm:max-w-none sm:text-sm sm:leading-5">
                 Secure Verification
                 <span className="mx-1.5 text-slate-700">
                   •
@@ -434,14 +434,14 @@ function App() {
             </section>
 
             {/* PROGRESS */}
-            <div className="mx-auto mt-6 w-full max-w-6xl sm:mt-8">
+            <div className="mx-auto mt-5 w-full max-w-6xl sm:mt-8">
               <FlowSteps
                 currentStep={selectedOption ? 2 : 1}
               />
             </div>
 
             {/* PHONE */}
-            <div className="mx-auto mt-5 w-full max-w-[390px] sm:mt-7">
+            <div className="mx-auto mt-4 w-full max-w-[390px] sm:mt-7">
               <PhoneShell>
 
                 {/* PHONE HEADER */}
@@ -461,7 +461,7 @@ function App() {
                       VELOOP
                     </p>
 
-                    <p className="text-[6px] font-bold uppercase tracking-[0.22em] text-slate-500 sm:text-[7px]">
+                    <p className="text-[6px] font-bold uppercase tracking-[0.22em] text-slate-400 sm:text-[7px]">
                       Rewards
                     </p>
                   </div>
@@ -481,7 +481,7 @@ function App() {
                 </div>
 
                 {/* PHONE CONTENT */}
-                <div className="min-w-0 px-3 pb-5 pt-6 sm:px-4 sm:pb-6 sm:pt-8">
+                <div className="min-w-0 px-3 pb-5 pt-5 sm:px-4 sm:pb-6 sm:pt-8">
 
                   <div className="text-center">
                     <h2 className="text-[22px] font-extrabold leading-tight text-white sm:text-2xl">
@@ -491,7 +491,7 @@ function App() {
                       </span>
                     </h2>
 
-                    <p className="mx-auto mt-1.5 max-w-[250px] text-[10px] leading-4 text-slate-500 sm:text-xs sm:leading-5">
+                    <p className="mx-auto mt-1.5 max-w-[250px] text-[10px] leading-4 text-slate-400 sm:text-xs sm:leading-5">
                       Complete a quick security check
                       to earn rewards.
                     </p>
@@ -512,7 +512,7 @@ function App() {
                   </div>
 
                   {/* OPTIONS */}
-                  <div className="mt-2.5 grid min-w-0 grid-cols-2 gap-2 sm:mt-4 sm:gap-2.5">
+                  <div className="mt-2.5 grid min-w-0 grid-cols-1 gap-2.5 sm:mt-4 sm:grid-cols-2 sm:gap-2.5">
                     {challenge.options.map((option) => (
                       <div
                         key={option}
@@ -540,7 +540,7 @@ function App() {
                         className="shrink-0 text-slate-400"
                       />
 
-                      <p className="min-w-0 text-[9px] leading-4 text-slate-500 sm:text-[10px]">
+                      <p className="min-w-0 text-[9px] leading-4 text-slate-400 sm:text-[10px]">
                         This helps protect your account
                         from automated access.
                       </p>
@@ -620,7 +620,7 @@ function App() {
       </div>
 
       <div className="min-w-0">
-        <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-amber-200/60">
+        <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-amber-200/85">
           Your reward
         </p>
 
@@ -636,7 +636,7 @@ function App() {
         +1
       </p>
 
-      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-amber-200/50">
+      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-amber-200/75">
         Gem
       </p>
     </div>
@@ -648,7 +648,7 @@ function App() {
       <div className="h-full w-2/3 rounded-full bg-gradient-to-r from-amber-500/70 to-yellow-300/80" />
     </div>
 
-    <span className="text-[7px] font-bold uppercase tracking-[0.12em] text-slate-600">
+    <span className="text-[7px] font-bold uppercase tracking-[0.12em] text-slate-400">
       Ready
     </span>
   </div>
@@ -666,8 +666,8 @@ function App() {
       =================================================== */}
 
       {screen === "verifying" && (
-        <main className="relative z-10 w-full">
-          <div className="mx-auto w-full max-w-7xl px-3 py-6 sm:px-6 sm:py-10 lg:px-8">
+        <main className="relative z-10 min-h-[680px] w-full sm:min-h-[760px]">
+          <div className="mx-auto flex min-h-[680px] w-full max-w-7xl flex-col px-3 py-6 sm:min-h-[760px] sm:px-6 sm:py-10 lg:px-8">
 
             {/* PAGE BRANDING */}
             <section className="mx-auto w-full max-w-4xl text-center">
@@ -689,7 +689,7 @@ function App() {
                 </span>
               </h1>
 
-              <p className="mt-2 text-[10px] font-medium text-slate-500 sm:text-sm">
+              <p className="mt-2 text-[10px] font-medium text-slate-400 sm:text-sm">
                 Secure Verification
                 <span className="mx-1.5">
                   •
@@ -752,7 +752,7 @@ function App() {
                       </span>
                     </div>
 
-                    <p className="mx-auto mt-2 max-w-[250px] text-sm leading-6 text-slate-500">
+                    <p className="mx-auto mt-2 max-w-[250px] text-sm leading-6 text-slate-400">
                       Checking your selected answer
                       and preparing your result.
                     </p>
@@ -762,7 +762,7 @@ function App() {
                   <div className="relative z-10 mt-8 w-full max-w-[250px]">
 
                     <div className="mb-2 flex items-center justify-between">
-                      <span className="text-[8px] font-bold uppercase tracking-[0.16em] text-slate-600">
+                      <span className="text-[8px] font-bold uppercase tracking-[0.16em] text-slate-400">
                         Verification
                       </span>
 
@@ -794,7 +794,7 @@ function App() {
                           Answer received
                         </p>
 
-                        <p className="text-[8px] text-slate-600">
+                        <p className="text-[8px] text-slate-400">
                           Your selection is being checked
                         </p>
                       </div>
@@ -813,7 +813,7 @@ function App() {
                           Security check
                         </p>
 
-                        <p className="text-[8px] text-slate-600">
+                        <p className="text-[8px] text-slate-400">
                           Validating verification
                         </p>
                       </div>
@@ -825,10 +825,10 @@ function App() {
                   <div className="relative z-10 mt-7 flex items-center justify-center gap-2">
                     <LockKeyhole
                       size={11}
-                      className="text-slate-600"
+                      className="text-slate-400"
                     />
 
-                    <p className="text-[8px] tracking-wide text-slate-600">
+                    <p className="text-[8px] tracking-wide text-slate-400">
                       Please wait while verification completes
                     </p>
                   </div>
@@ -845,7 +845,7 @@ function App() {
       =================================================== */}
 
       {screen === "checking" && (
-        <main className="relative z-10 w-full">
+        <main className="relative z-10 flex min-h-[680px] w-full items-start justify-center sm:min-h-[760px]">
           <CheckingScreen />
         </main>
       )}
@@ -855,7 +855,7 @@ function App() {
       =================================================== */}
 
       {screen === "result" && (
-        <main className="relative z-10 w-full">
+        <main className="relative z-10 flex min-h-[680px] w-full items-start justify-center sm:min-h-[760px]">
           <ResultScreen
             isCorrect={isCorrect}
             reward={reward}
@@ -890,7 +890,7 @@ function App() {
               Preparing your reward
             </p>
 
-            <p className="relative mt-2 text-xs leading-5 text-slate-500">
+            <p className="relative mt-2 text-xs leading-5 text-slate-400">
               Your reward confirmation is being prepared.
             </p>
 
@@ -899,7 +899,7 @@ function App() {
               <div className="h-full w-1/2 animate-pulse rounded-full bg-gradient-to-r from-amber-400 to-yellow-200" />
             </div>
 
-            <div className="relative mt-5 flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-600">
+            <div className="relative mt-5 flex items-center justify-center gap-2 text-[9px] font-bold uppercase tracking-[0.15em] text-slate-400">
               <Sparkles size={12} />
               Processing reward
             </div>

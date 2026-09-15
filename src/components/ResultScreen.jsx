@@ -115,7 +115,7 @@ function ResultScreen({
             {isCorrect ? "Great Job!" : "Not Quite!"}
           </h2>
 
-          <p className="mx-auto mt-2 max-w-[270px] text-[10px] leading-relaxed text-slate-500">
+          <p className="mx-auto mt-2 max-w-[270px] text-[10px] leading-relaxed text-slate-400">
             {isCorrect
               ? "Your CAPTCHA was verified successfully. Your reward is ready to claim."
               : "The selected CAPTCHA doesn't match. You still receive a participation reward."}
@@ -176,7 +176,7 @@ function ResultScreen({
                       </span>
                     </div>
 
-                    <p className="mt-0.5 text-[8px] text-slate-600">
+                    <p className="mt-0.5 text-[8px] text-slate-400">
                       Added to your reward wallet
                     </p>
                   </div>
@@ -195,7 +195,7 @@ function ResultScreen({
             {/* Reward progress */}
             <div className="mt-5">
               <div className="mb-1.5 flex items-center justify-between">
-                <span className="text-[7px] font-bold uppercase tracking-[0.14em] text-slate-600">
+                <span className="text-[7px] font-bold uppercase tracking-[0.14em] text-slate-400">
                   Reward Ready
                 </span>
 
@@ -224,7 +224,7 @@ function ResultScreen({
 
             {/* Current */}
             <div>
-              <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-slate-600">
+              <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-slate-400">
                 Current Balance
               </p>
 
@@ -245,7 +245,7 @@ function ResultScreen({
 
             {/* After claim */}
             <div className="text-right">
-              <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-slate-600">
+              <p className="text-[7px] font-bold uppercase tracking-[0.16em] text-slate-400">
                 After Claim
               </p>
 
@@ -263,22 +263,31 @@ function ResultScreen({
         <button
           type="button"
           onClick={onClaim}
+          aria-label={`Add ${rewardAmount} Gem${rewardAmount === 1 ? "" : "s"} to balance`}
           className="
-            group/button relative mt-4 flex w-full
-            items-center justify-center gap-2
-            overflow-hidden rounded-xl
-            border border-amber-300/30
-            bg-gradient-to-r from-amber-300/[0.13] via-yellow-300/[0.08] to-amber-300/[0.10]
-            px-4 py-3.5
-            text-[11px] font-bold text-amber-100
-            shadow-[0_0_30px_rgba(251,191,36,0.08)]
-            transition-all duration-300
-            hover:-translate-y-0.5
-            hover:border-amber-300/45
-            hover:shadow-[0_12px_35px_rgba(251,191,36,0.14)]
-            active:scale-[0.98]
-          "
-        >
+              group/button relative mt-4 flex min-h-[48px] w-full
+              items-center justify-center gap-2
+               overflow-hidden rounded-xl
+               border border-amber-300/30
+              bg-gradient-to-r from-amber-300/[0.13] via-yellow-300/[0.08] to-amber-300/[0.10]
+                px-4 py-3.5
+                text-[11px] font-bold text-amber-100
+                shadow-[0_0_30px_rgba(251,191,36,0.08)]
+               transition-all duration-300
+               touch-manipulation
+               hover:-translate-y-0.5
+              hover:border-amber-300/50
+             hover:bg-amber-300/[0.16]
+             hover:shadow-[0_12px_35px_rgba(251,191,36,0.16)]
+                active:translate-y-0
+                active:scale-[0.97]
+               focus-visible:outline-none
+               focus-visible:ring-2
+              focus-visible:ring-amber-300/50
+                 focus-visible:ring-offset-2
+                  focus-visible:ring-offset-[#06101c]
+           "
+          >
           <div className="pointer-events-none absolute inset-y-0 -left-full w-1/3 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/[0.10] to-transparent transition-all duration-700 group-hover/button:left-[130%]" />
 
           <Gem
@@ -295,14 +304,25 @@ function ResultScreen({
         {/* Secondary action */}
         <button
           type="button"
-          onClick={onNoThanks}
-          className="
-            mt-2 w-full rounded-xl px-4 py-2.5
-            text-[9px] font-semibold text-slate-500
-            transition-all duration-200
-            hover:bg-white/[0.025]
-            hover:text-slate-300
-          "
+         onClick={onNoThanks}
+         className="
+            mt-2 flex min-h-[44px] w-full
+           items-center justify-center
+           rounded-xl border border-transparent
+           px-4 py-2.5
+           text-[9px] font-semibold text-slate-400
+           transition-all duration-200
+           touch-manipulation
+           hover:border-white/[0.07]
+           hover:bg-white/[0.035]
+            hover:text-slate-200
+            active:scale-[0.98]
+           focus-visible:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-blue-400/35
+            focus-visible:ring-offset-2
+            focus-visible:ring-offset-[#06101c]
+         "
         >
           {isCorrect ? "Maybe Later" : "Try Another CAPTCHA"}
         </button>
@@ -317,7 +337,7 @@ function ResultScreen({
             />
           </div>
 
-          <span className="text-[8px] font-medium text-slate-600">
+          <span className="text-[8px] font-medium text-slate-400">
             Secure reward processing
           </span>
         </div>
